@@ -147,9 +147,14 @@
 
     <!-- Barra navigazione scene -->
     <nav class="scene-nav" aria-label="Naviga tra le stanze">
-      <button class="scene-btn active" data-scene="soggiorno" aria-pressed="true">Soggiorno</button>
-      <button class="scene-btn"        data-scene="cucina"    aria-pressed="false">Cucina</button>
-      <button class="scene-btn"        data-scene="camera"    aria-pressed="false">Camera</button>
+      <div class="scene-nav__scroll">
+        <button class="scene-btn active" data-scene="soggiorno" aria-pressed="true">Zona Giorno</button>
+        <button class="scene-btn"        data-scene="cucina"    aria-pressed="false">Cucina</button>
+        <button class="scene-btn"        data-scene="camera"    aria-pressed="false">Camera Padronale</button>
+        <button class="scene-btn"        data-scene="camera2"   aria-pressed="false">Seconda Camera</button>
+        <button class="scene-btn"        data-scene="bagno1"    aria-pressed="false">Bagno 1</button>
+        <button class="scene-btn"        data-scene="bagno2"    aria-pressed="false">Bagno 2</button>
+      </div>
       <button id="btn-back-landing" class="scene-btn scene-btn--back" aria-label="Torna alla scheda">✕</button>
     </nav>
 

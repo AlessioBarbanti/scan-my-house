@@ -293,11 +293,25 @@ body {
   z-index: 60;
 }
 
-.scene-btn {
+/* Contenitore scrollabile — nasconde la scrollbar nativa */
+.scene-nav__scroll {
   flex: 1;
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 1px; /* evita clipping del focus ring */
+}
+
+.scene-nav__scroll::-webkit-scrollbar { display: none; }
+.scene-nav__scroll { scrollbar-width: none; -ms-overflow-style: none; }
+
+.scene-btn {
+  flex: none;
   height: 44px;
   min-width: 44px;
-  padding: 0;
+  padding: 0 16px;
+  white-space: nowrap;
   background: rgba(255, 255, 255, 0.08);
   color: #fff;
   border: 1px solid rgba(255, 255, 255, 0.12);

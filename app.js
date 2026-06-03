@@ -73,16 +73,20 @@ function buildScenes() {
     soggiorno: { type: 'equirectangular', panorama: 'assets/tour-soggiorno-vuoto.webp', hotSpots: byScene['soggiorno'] || [] },
     cucina:    { type: 'equirectangular', panorama: 'assets/tour-cucina-vuota.webp',    hotSpots: byScene['cucina']    || [] },
     camera:    { type: 'equirectangular', panorama: 'assets/tour-camera-vuota.webp',    hotSpots: byScene['camera']    || [] },
+    camera2:   { type: 'equirectangular', panorama: 'assets/tour-camera2-vuota.webp',   hotSpots: byScene['camera2']   || [] },
+    bagno1:    { type: 'equirectangular', panorama: 'assets/tour-bagno1-vuoto.webp',    hotSpots: byScene['bagno1']    || [] },
+    bagno2:    { type: 'equirectangular', panorama: 'assets/tour-bagno2-vuoto.webp',    hotSpots: byScene['bagno2']    || [] },
   };
 }
 
 // ─────────────────── VIEWER & SCENE ──────────────────────────
 function startTour() {
-  if (viewer) return;
-
   document.getElementById('landing').hidden          = true;
   document.getElementById('sticky-actions').hidden   = true;
   document.getElementById('viewer-wrapper').hidden   = false;
+
+  // Se il viewer esiste già, basta mostrarlo (fix: riapertura dopo chiusura)
+  if (viewer) return;
 
   viewer = pannellum.viewer('viewer', {
     default: {
