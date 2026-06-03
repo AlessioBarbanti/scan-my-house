@@ -1,0 +1,47 @@
+[
+  {
+    "id":    "soggiorno-angolo-divano",
+    "scene": "soggiorno",
+    "type":  "staging",
+    "pitch": 2,
+    "yaw":   -30,
+    "label": "Vedi zona divano arredata",
+    "render": "assets/render-soggiorno-divano.webp"
+  },
+  {
+    "id":    "soggiorno-to-cucina",
+    "scene": "soggiorno",
+    "type":  "scene",
+    "pitch": 0,
+    "yaw":   80,
+    "label": "Vai in cucina →",
+    "targetScene": "cucina"
+  },
+  {
+    "id":    "cucina-piano-lavoro",
+    "scene": "cucina",
+    "type":  "staging",
+    "pitch": -5,
+    "yaw":   20,
+    "label": "Vedi cucina arredata",
+    "render": "assets/render-cucina-arredata.webp"
+  },
+  {
+    "id":    "cucina-to-camera",
+    "scene": "cucina",
+    "type":  "scene",
+    "pitch": 0,
+    "yaw":   -90,
+    "label": "Vai in camera →",
+    "targetScene": "camera"
+  },
+  {
+    "id":    "camera-angolo-letto",
+    "scene": "camera",
+    "type":  "staging",
+    "pitch": 5,
+    "yaw":   10,
+    "label": "Vedi camera arredata",
+    "render": "assets/render-camera-arredata.webp"
+  }
+]

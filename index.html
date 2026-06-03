@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Vendesi trilocale 83 mq nuova realizzazione. Classe A, infissi Finstral, box auto. Consegna luglio 2026.">
+  <title>Trilocale 83 mq – Nuova Realizzazione | Virtual Tour</title>
+
+  <!-- Colore barra browser (mobile) -->
+  <meta name="theme-color" content="#1a1a2e">
+
+  <!-- Favicon (SVG universale + fallback PNG) -->
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="alternate icon" href="assets/favicon-32.png" sizes="32x32">
+
+  <!-- Open Graph — anteprima su WhatsApp, iMessage, Telegram -->
+  <meta property="og:type"        content="website">
+  <meta property="og:title"       content="Trilocale 83 mq – Nuova Realizzazione">
+  <meta property="og:description" content="Classe A, infissi Finstral, box auto, consegna luglio 2026. Esplora il tour virtuale 360°.">
+  <meta property="og:image"       content="https://AlessioBarbanti.github.io/scan-my-house/assets/og-preview.webp">
+  <meta property="og:url"         content="https://AlessioBarbanti.github.io/scan-my-house/">
+
+  <!-- Google Analytics 4 — sostituire G-XXXXXXXXXX con il Measurement ID reale -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX', {
+      page_title: 'Virtual Open House - Trilocale 83mq',
+      send_page_view: true
+    });
+  </script>
+
+  <!-- Pannellum (defer: non blocca il first paint) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
+
+  <!-- Stili e logica -->
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preload" as="image" href="assets/preview-hero.webp" type="image/webp">
+  <script defer src="app.js"></script>
+</head>
+<body>
+
+  <!-- ══════════════════ LANDING (fase 1 – statica) ══════════════════ -->
+  <main id="landing" class="landing">
+
+    <!-- Hero -->
+    <div class="hero">
+      <img
+        src="assets/preview-hero.webp"
+        alt="Foto principale dell'appartamento"
+        class="hero__img"
+        width="800" height="530"
+        onerror="this.src='assets/placeholder-hero.svg'; this.onerror=null;"
+      >
+      <span class="hero__badge">Nuova realizzazione</span>
+    </div>
+
+    <!-- Intestazione annuncio -->
+    <section class="card card--header">
+      <p class="card__tag">Vendesi</p>
+      <h1 class="card__title">Trilocale – <span class="highlight">83 mq</span></h1>
+      <p class="card__price">Trattativa riservata</p>
+      <p class="card__subtitle">Consegna: <strong>Luglio 2026</strong></p>
+      <div class="energy">
+        <span class="energy__badge" aria-label="Classe energetica A">A</span>
+        <span class="energy__label">Classe Energetica — massima efficienza e risparmio sui consumi</span>
+      </div>
+    </section>
+
+    <!-- Dotazioni incluse -->
+    <section class="card card--features">
+      <h2 class="card__section-title">Dotazioni incluse</h2>
+      <ul class="feature-list">
+        <li class="feature-list__item">
+          <span class="feature-list__icon" aria-hidden="true">🚪</span>
+          Ingresso indipendente
+        </li>
+        <li class="feature-list__item">
+          <span class="feature-list__icon" aria-hidden="true">🚗</span>
+          Box auto
+        </li>
+        <li class="feature-list__item">
+          <span class="feature-list__icon" aria-hidden="true">🪟</span>
+          Infissi FINSTRAL ad elevato isolamento termoacustico
+        </li>
+        <li class="feature-list__item">
+          <span class="feature-list__icon" aria-hidden="true">❄️</span>
+          Impianto climatizzazione multi-split con modulo idronico
+        </li>
+        <li class="feature-list__item">
+          <span class="feature-list__icon" aria-hidden="true">🛁</span>
+          Pavimenti e sanitari completi
+        </li>
+      </ul>
+    </section>
+
+    <!-- CTA Tour -->
+    <section class="card card--cta">
+      <p class="cta-hint">Scansiona il QR Code per visionare la planimetria e tutti i dettagli — oppure esplora subito il tour virtuale.</p>
+      <button id="btn-start-tour" class="btn btn--primary" aria-label="Avvia il tour virtuale 360°">
+        🔭 Inizia il Tour Immersivo
+      </button>
+    </section>
+
+  </main>
+
+  <!-- ══════════════════ VIEWER 360 (fase 2 – lazy) ══════════════════ -->
+  <div id="viewer-wrapper" class="viewer-wrapper" hidden aria-label="Tour virtuale 360°" role="region">
+
+    <!-- Barra navigazione scene -->
+    <nav class="scene-nav" aria-label="Naviga tra le stanze">
+      <button class="scene-btn active" data-scene="soggiorno" aria-pressed="true">Soggiorno</button>
+      <button class="scene-btn"        data-scene="cucina"    aria-pressed="false">Cucina</button>
+      <button class="scene-btn"        data-scene="camera"    aria-pressed="false">Camera</button>
+      <button id="btn-back-landing" class="scene-btn scene-btn--back" aria-label="Torna alla scheda">✕</button>
+    </nav>
+
+    <!-- Canvas Pannellum -->
+    <div id="viewer" class="viewer" role="img" aria-label="Panorama 360° della stanza"></div>
+
+  </div>
+
+  <!-- ══════════════════ MODALE VIRTUAL STAGING ══════════════════ -->
+  <div id="staging-modal" class="modal" hidden
+       role="dialog" aria-modal="true" aria-label="Come potrebbe essere questa stanza">
+    <div class="modal__backdrop" id="modal-backdrop"></div>
+    <div class="modal__content">
+      <button id="modal-close" class="modal__close" aria-label="Chiudi">✕</button>
+      <p class="modal__title" id="modal-title">Come potrebbe essere</p>
+      <img id="modal-img" src="" alt="" class="modal__img"
+           onerror="this.src='assets/placeholder-render.svg'; this.onerror=null;">
+      <!-- WhatsApp dentro modale -->
+      <a id="wa-modal" href="" class="btn btn--whatsapp btn--whatsapp-modal"
+         target="_blank" rel="noopener noreferrer"
+         aria-label="Contattami su WhatsApp">
+        💬 Contattami su WhatsApp
+      </a>
+    </div>
+  </div>
+
+  <!-- ══════════════════ STICKY WHATSAPP ══════════════════ -->
+  <a id="wa-sticky" href="" class="btn btn--whatsapp btn--whatsapp-sticky"
+     target="_blank" rel="noopener noreferrer"
+     aria-label="Contattami su WhatsApp">
+    💬 Contattami su WhatsApp
+  </a>
+
+</body>
+</html>
