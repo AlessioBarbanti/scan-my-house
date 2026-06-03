@@ -80,9 +80,9 @@ function buildScenes() {
 function startTour() {
   if (viewer) return;
 
-  document.getElementById('landing').hidden        = true;
-  document.getElementById('wa-sticky').hidden      = true;
-  document.getElementById('viewer-wrapper').hidden = false;
+  document.getElementById('landing').hidden          = true;
+  document.getElementById('sticky-actions').hidden   = true;
+  document.getElementById('viewer-wrapper').hidden   = false;
 
   viewer = pannellum.viewer('viewer', {
     default: {
@@ -113,9 +113,9 @@ function switchScene(sceneId) {
 }
 
 function backToLanding() {
-  document.getElementById('viewer-wrapper').hidden = true;
-  document.getElementById('landing').hidden        = false;
-  document.getElementById('wa-sticky').hidden      = false;
+  document.getElementById('viewer-wrapper').hidden  = true;
+  document.getElementById('landing').hidden          = false;
+  document.getElementById('sticky-actions').hidden   = false;
 }
 
 function prefetchStagingImages() {
