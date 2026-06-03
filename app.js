@@ -5,7 +5,7 @@
 // ─────────────────── CONFIGURAZIONE ──────────────────────────
 const WA_NUMBER = '393384346876';
 const WA_TEXT   = encodeURIComponent(
-  'Ciao, ho fatto il tour virtuale del trilocale e vorrei maggiori informazioni.'
+  'Ciao, ho visto il trilocale in via Paisiello e vorrei maggiori informazioni.'
 );
 const WA_URL    = `https://wa.me/${WA_NUMBER}?text=${WA_TEXT}`;
 
