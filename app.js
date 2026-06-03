@@ -26,16 +26,12 @@ function gtagEvent(name, params = {}) {
 
 // ─────────────────── WHATSAPP ────────────────────────────────
 function initWhatsApp() {
-  ['wa-sticky', 'wa-modal'].forEach(id => {
-    const el = document.getElementById(id);
-    if (!el) return;
-    el.href = WA_URL;
-    el.addEventListener('click', () =>
-      gtagEvent('whatsapp_clicked', {
-        position: id === 'wa-sticky' ? 'sticky' : 'modal',
-      })
-    );
-  });
+  const el = document.getElementById('wa-sticky');
+  if (!el) return;
+  el.href = WA_URL;
+  el.addEventListener('click', () =>
+    gtagEvent('whatsapp_clicked', { position: 'sticky' })
+  );
 }
 
 // ─────────────────── HOTSPOT BUILDER ─────────────────────────
