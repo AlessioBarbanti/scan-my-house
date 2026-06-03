@@ -55,18 +55,29 @@
         width="800" height="530"
         onerror="this.src='assets/placeholder-hero.svg'; this.onerror=null;"
       >
-      <span class="hero__badge">Nuova realizzazione</span>
     </div>
 
     <!-- Intestazione annuncio -->
     <section class="card card--header">
-      <p class="card__tag">Vendesi · Nuova Costruzione</p>
+      <p class="card__tag">Vendesi &middot; Nuova Costruzione</p>
       <h1 class="card__title">Trilocale</h1>
-      <div class="stats">
-        <span class="stat">83 mq</span>
-        <span class="stat">3 locali</span>
-        <span class="stat stat--energy">Classe A</span>
-        <span class="stat">Luglio 2026</span>
+      <div class="stats-grid">
+        <div class="stat-item">
+          <span class="stat-value">83 <span class="stat-unit">mq</span></span>
+          <span class="stat-label">Superficie</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value">3 <span class="stat-unit">loc</span></span>
+          <span class="stat-label">Locali</span>
+        </div>
+        <div class="stat-item stat-item--energy">
+          <span class="stat-value">A</span>
+          <span class="stat-label">Classe Energetica</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value">Lug <span class="stat-unit">'26</span></span>
+          <span class="stat-label">Consegna</span>
+        </div>
       </div>
       <p class="card__price">Trattativa riservata</p>
     </section>
