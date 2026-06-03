@@ -288,8 +288,8 @@ body {
   background: rgba(0, 0, 0, 0.75);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  padding: 10px 12px;
-  gap: 8px;
+  padding: 10px 0 10px 12px; /* niente padding-right: il fade copre quel lato */
+  gap: 0;
   z-index: 60;
 }
 
@@ -301,6 +301,12 @@ body {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   padding-bottom: 1px; /* evita clipping del focus ring */
+  /* Bleeding: padding-right garantisce che il bottone tagliato rimanga visibile */
+  padding-right: 48px;
+
+  /* Fade-out sul bordo destro prima della "X" */
+  mask-image: linear-gradient(to right, black 75%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, black 75%, transparent 100%);
 }
 
 .scene-nav__scroll::-webkit-scrollbar { display: none; }
@@ -310,11 +316,11 @@ body {
   flex: none;
   height: 44px;
   min-width: 44px;
-  padding: 0 16px;
+  padding: 0 14px;
   white-space: nowrap;
-  background: rgba(255, 255, 255, 0.08);
-  color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: transparent;
+  color: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: 8px;
   font-family: 'Montserrat', system-ui, sans-serif;
   font-size: 0.8rem;
@@ -325,16 +331,26 @@ body {
 
 .scene-btn:active { opacity: 0.7; }
 
+/* Stato attivo: bianco pieno — dice "sei qui" */
 .scene-btn.active,
 .scene-btn[aria-pressed="true"] {
-  background: #0A5CFF;
-  border-color: #0A5CFF;
+  background: #ffffff;
+  color: #111;
+  border-color: transparent;
 }
 
+/* Pulsante "X": icona di sistema, non bottone della lista */
 .scene-btn--back {
-  flex: 0 0 44px;
-  background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(255, 255, 255, 0.08);
+  flex: 0 0 52px;
+  min-width: 52px;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 1rem;
+  /* Linea verticale di separazione a sinistra */
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0;
 }
 
 /* ── Hotspot ──────────────────────────────────────────────── */
