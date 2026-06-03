@@ -7,7 +7,7 @@
   <title>Trilocale 83 mq – Nuova Realizzazione | Virtual Tour</title>
 
   <!-- Colore barra browser (mobile) -->
-  <meta name="theme-color" content="#1a1a2e">
+  <meta name="theme-color" content="#121212">
 
   <!-- Favicon (SVG universale + fallback PNG) -->
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
@@ -47,7 +47,7 @@
   <main id="landing" class="landing">
 
     <!-- Hero -->
-    <div class="hero">
+    <div class="hero fade-in-1">
       <img
         src="assets/preview-hero.webp"
         alt="Foto principale dell'appartamento"
@@ -55,36 +55,39 @@
         width="800" height="530"
         onerror="this.src='assets/placeholder-hero.svg'; this.onerror=null;"
       >
+      <div class="hero__gradient" aria-hidden="true"></div>
     </div>
 
     <!-- Intestazione annuncio -->
-    <section class="card card--header">
-      <p class="card__tag">Vendesi &middot; Nuova Costruzione</p>
-      <h1 class="card__title">Trilocale</h1>
-      <div class="stats-grid">
-        <div class="stat-item">
-          <span class="stat-value">83 <span class="stat-unit">mq</span></span>
-          <span class="stat-label">Superficie</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-value">3 <span class="stat-unit">loc</span></span>
-          <span class="stat-label">Locali</span>
-        </div>
-        <div class="stat-item stat-item--energy">
-          <span class="stat-value">A</span>
-          <span class="stat-label">Classe Energetica</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-value">Lug <span class="stat-unit">'26</span></span>
-          <span class="stat-label">Consegna</span>
-        </div>
+    <div class="section fade-in-2">
+      <p class="tag">Vendesi &middot; Nuova Costruzione</p>
+      <h1 class="title">Trilocale</h1>
+      <span class="price-badge">Trattativa riservata</span>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-grid fade-in-2">
+      <div class="stat-item">
+        <div class="stat-value">83 <span class="stat-unit">mq</span></div>
+        <div class="stat-label">Superficie</div>
       </div>
-      <p class="card__price">Trattativa riservata</p>
-    </section>
+      <div class="stat-item">
+        <div class="stat-value">3</div>
+        <div class="stat-label">Locali</div>
+      </div>
+      <div class="stat-item stat-item--energy">
+        <div class="stat-value">A</div>
+        <div class="stat-label">Classe En.</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">Lug <span class="stat-unit">'26</span></div>
+        <div class="stat-label">Consegna</div>
+      </div>
+    </div>
 
     <!-- Dotazioni incluse -->
-    <section class="card card--features">
-      <h2 class="card__section-title">Dotazioni incluse</h2>
+    <div class="section fade-in-3">
+      <p class="section-title">Dotazioni incluse</p>
       <ul class="feature-list">
         <li class="feature-list__item">
           <svg class="feature-icon" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -128,14 +131,14 @@
           Pavimenti e sanitari completi
         </li>
       </ul>
-    </section>
+    </div>
 
     <!-- CTA Tour -->
-    <section class="card card--cta">
-      <button id="btn-start-tour" class="btn btn--primary" aria-label="Avvia il tour virtuale 360°">
+    <div class="cta-section fade-in-4">
+      <button id="btn-start-tour" class="btn btn--primary btn--block" aria-label="Avvia il tour virtuale 360°">
         Esplora il tour virtuale 360°
       </button>
-    </section>
+    </div>
 
   </main>
 
@@ -168,15 +171,19 @@
   </div>
 
   <!-- ══════════════════════ STICKY BOTTONI ══════════════════════ -->
-  <div id="sticky-actions" class="sticky-actions">
-    <a href="tel:+393384346876" class="btn btn--call"
-       aria-label="Chiama il 338 434 6876">
-      📞&nbsp; 338 434 6876
-    </a>
+  <div id="sticky-actions" class="sticky-bar">
     <a id="wa-sticky" href="" class="btn btn--whatsapp"
        target="_blank" rel="noopener noreferrer"
        aria-label="Contattami su WhatsApp">
-      💬 Contattami su WhatsApp
+      WhatsApp
+    </a>
+    <a href="tel:+393384346876" class="btn btn--call"
+       aria-label="Chiama il 338 434 6876">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+           stroke-linecap="round" stroke-linejoin="round"
+           width="22" height="22" aria-hidden="true">
+        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 3.07 9.8a19.79 19.79 0 0 1-3.06-8.62A2 2 0 0 1 2 0h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L6.09 7.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 14v2.92z"/>
+      </svg>
     </a>
   </div>
 
