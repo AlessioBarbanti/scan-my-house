@@ -70,7 +70,7 @@ function buildScenes() {
     (byScene[h.scene] = byScene[h.scene] || []).push(buildPannellumHotspot(h));
   });
   return {
-    soggiorno: { type: 'equirectangular', panorama: 'assets/tour-soggiorno-vuoto.webp', hotSpots: byScene['soggiorno'] || [] },
+    soggiorno: { type: 'equirectangular', panorama: 'assets/salotto_pano.jpg', hotSpots: byScene['soggiorno'] || [] },
     cucina:    { type: 'equirectangular', panorama: 'assets/tour-cucina-vuota.webp',    hotSpots: byScene['cucina']    || [] },
     camera:    { type: 'equirectangular', panorama: 'assets/tour-camera-vuota.webp',    hotSpots: byScene['camera']    || [] },
     camera2:   { type: 'equirectangular', panorama: 'assets/tour-camera2-vuota.webp',   hotSpots: byScene['camera2']   || [] },

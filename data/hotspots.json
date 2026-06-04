@@ -6,7 +6,7 @@
     "pitch": 2,
     "yaw":   -30,
     "label": "Vedi zona divano arredata",
-    "render": "assets/render-soggiorno-divano.webp"
+    "render": "assets/foto_bagno_arredata.png"
   },
   {
     "id":    "soggiorno-to-cucina",
