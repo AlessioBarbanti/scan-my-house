@@ -70,12 +70,12 @@ function buildScenes() {
     (byScene[h.scene] = byScene[h.scene] || []).push(buildPannellumHotspot(h));
   });
   return {
-    soggiorno: { type: 'equirectangular', panorama: 'assets/salotto_pano.jpg', hotSpots: byScene['soggiorno'] || [] },
-    cucina:    { type: 'equirectangular', panorama: 'assets/tour-cucina-vuota.webp',    hotSpots: byScene['cucina']    || [] },
-    camera:    { type: 'equirectangular', panorama: 'assets/tour-camera-vuota.webp',    hotSpots: byScene['camera']    || [] },
-    camera2:   { type: 'equirectangular', panorama: 'assets/tour-camera2-vuota.webp',   hotSpots: byScene['camera2']   || [] },
-    bagno1:    { type: 'equirectangular', panorama: 'assets/tour-bagno1-vuoto.webp',    hotSpots: byScene['bagno1']    || [] },
-    bagno2:    { type: 'equirectangular', panorama: 'assets/tour-bagno2-vuoto.webp',    hotSpots: byScene['bagno2']    || [] },
+    soggiorno: { type: 'equirectangular', panorama: 'assets/soggiorno_pano.jpg',        haov: 360, vaov: 60, hotSpots: byScene['soggiorno'] || [] },
+    cucina:    { type: 'equirectangular', panorama: 'assets/tour-cucina-vuota.webp',   haov: 360, vaov: 60, hotSpots: byScene['cucina']    || [] },
+    camera:    { type: 'equirectangular', panorama: 'assets/camera_padronale_pano.jpg',haov: 360, vaov: 60, hotSpots: byScene['camera']    || [] },
+    camera2:   { type: 'equirectangular', panorama: 'assets/tour-camera2-vuota.webp', haov: 360, vaov: 60, hotSpots: byScene['camera2']   || [] },
+    bagno1:    { type: 'equirectangular', panorama: 'assets/tour-bagno1-vuoto.webp',   haov: 360, vaov: 60, hotSpots: byScene['bagno1']    || [] },
+    bagno2:    { type: 'equirectangular', panorama: 'assets/tour-bagno2-vuoto.webp',   haov: 360, vaov: 60, hotSpots: byScene['bagno2']    || [] },
   };
 }
 
@@ -97,6 +97,11 @@ function startTour() {
       showControls:       true,
       showZoomCtrl:       false,
       showFullscreenCtrl: false,
+      hfov:               95,   // vfov risultante ~57° < vaov=60° su schermo 2:1
+      minHfov:            40,
+      maxHfov:            95,
+      minPitch:           -28,
+      maxPitch:           28,
     },
     scenes: buildScenes(),
   });

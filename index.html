@@ -3,191 +3,231 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Vendesi trilocale 83 mq nuova realizzazione. Classe A, infissi Finstral, box auto. Consegna luglio 2026.">
+  <meta name="theme-color" content="#0A0A0A">
+  <meta name="description" content="Trilocale 83 mq nuova realizzazione. Classe A, infissi Finstral, box auto. Consegna luglio 2026.">
   <title>Trilocale 83 mq – Nuova Realizzazione | Virtual Tour</title>
 
-  <!-- Colore barra browser (mobile) -->
-  <meta name="theme-color" content="#121212">
-
-  <!-- Favicon (SVG universale + fallback PNG) -->
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <link rel="alternate icon" href="assets/favicon-32.png" sizes="32x32">
 
-  <!-- Open Graph — anteprima su WhatsApp, iMessage, Telegram -->
+  <!-- Open Graph -->
   <meta property="og:type"        content="website">
   <meta property="og:title"       content="Trilocale 83 mq – Nuova Realizzazione">
   <meta property="og:description" content="Classe A, infissi Finstral, box auto, consegna luglio 2026. Esplora il tour virtuale 360°.">
   <meta property="og:image"       content="https://AlessioBarbanti.github.io/scan-my-house/assets/og-preview.webp">
   <meta property="og:url"         content="https://AlessioBarbanti.github.io/scan-my-house/">
 
-  <!-- Google Analytics 4 — sostituire G-XXXXXXXXXX con il Measurement ID reale -->
+  <!-- Google Analytics 4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-XXXXXXXXXX', {
-      page_title: 'Virtual Open House - Trilocale 83mq',
-      send_page_view: true
-    });
+    gtag('config', 'G-XXXXXXXXXX', { page_title: 'Virtual Open House - Trilocale 83mq', send_page_view: true });
   </script>
 
-  <!-- Pannellum (defer: non blocca il first paint) -->
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap">
+
+  <!-- Pannellum -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css">
   <script defer src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
 
-  <!-- Stili e logica -->
   <link rel="stylesheet" href="styles.css">
-  <link rel="preload" as="image" href="assets/preview-hero.webp" type="image/webp">
   <script defer src="app.js"></script>
 </head>
 <body>
 
-  <!-- ══════════════════ LANDING (fase 1 – statica) ══════════════════ -->
+  <!-- ══════════════════ LANDING ══════════════════ -->
   <main id="landing" class="landing">
 
     <!-- Hero -->
-    <div class="hero fade-in-1">
-      <img
-        src="assets/preview-hero.webp"
-        alt="Foto principale dell'appartamento"
-        class="hero__img"
-        width="800" height="530"
-        onerror="this.src='assets/placeholder-hero.svg'; this.onerror=null;"
-      >
-      <div class="hero__gradient" aria-hidden="true"></div>
-    </div>
-
-    <!-- Intestazione annuncio -->
-    <div class="section fade-in-2">
-      <p class="tag">Vendesi &middot; Nuova Costruzione</p>
-      <h1 class="title">Trilocale</h1>
-      <span class="price-badge">Trattativa riservata</span>
-    </div>
-
-    <!-- Stats -->
-    <div class="stats-grid fade-in-2">
-      <div class="stat-item">
-        <div class="stat-value">83 <span class="stat-unit">mq</span></div>
-        <div class="stat-label">Superficie</div>
+    <div class="hero">
+      <img src="assets/esterno_sx.jpg" alt="Appartamento — esterno" class="hero__img">
+      <div class="hero__overlay" aria-hidden="true"></div>
+      <div class="hero__badge">
+        <span class="hero__badge-text">Nuova Costruzione</span>
       </div>
-      <div class="stat-item">
-        <div class="stat-value">3</div>
-        <div class="stat-label">Locali</div>
-      </div>
-      <div class="stat-item stat-item--energy">
-        <div class="stat-value">A</div>
-        <div class="stat-label">Classe En.</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-value">Lug <span class="stat-unit">'26</span></div>
-        <div class="stat-label">Consegna</div>
+      <div class="hero__caption">
+        <p class="hero__eyebrow">
+          <span class="hero__eyebrow-line" aria-hidden="true"></span>
+          Vendesi
+        </p>
+        <h1 class="hero__title">Trilocale</h1>
+        <p class="hero__address">83 mq · Via Paisiello</p>
+        <div class="hero__price-badge">
+          <span>Trattativa riservata</span>
+        </div>
       </div>
     </div>
 
-    <!-- Dotazioni incluse -->
-    <div class="section fade-in-3">
-      <p class="section-title">Dotazioni incluse</p>
-      <ul class="feature-list">
-        <li class="feature-list__item">
-          <svg class="feature-icon" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <rect x="4" y="1" width="12" height="18" rx="1.5" stroke="currentColor" stroke-width="1.6"/>
-            <circle cx="13" cy="10" r="1.2" fill="currentColor"/>
-          </svg>
-          Ingresso indipendente
-        </li>
-        <li class="feature-list__item">
-          <svg class="feature-icon" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M3 12L5.5 7H14.5L17 12" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
-            <rect x="2" y="12" width="16" height="6" rx="1" stroke="currentColor" stroke-width="1.6"/>
-            <circle cx="6" cy="15.5" r="1.5" fill="currentColor"/>
-            <circle cx="14" cy="15.5" r="1.5" fill="currentColor"/>
-          </svg>
-          Box auto
-        </li>
-        <li class="feature-list__item">
-          <svg class="feature-icon" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <rect x="2" y="2" width="16" height="16" rx="1.5" stroke="currentColor" stroke-width="1.6"/>
-            <line x1="10" y1="2" x2="10" y2="18" stroke="currentColor" stroke-width="1.6"/>
-            <line x1="2" y1="10" x2="18" y2="10" stroke="currentColor" stroke-width="1.6"/>
-          </svg>
-          Infissi FINSTRAL ad elevato isolamento termoacustico
-        </li>
-        <li class="feature-list__item">
-          <svg class="feature-icon" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <rect x="1" y="5" width="18" height="8" rx="2" stroke="currentColor" stroke-width="1.6"/>
-            <line x1="5" y1="9" x2="13" y2="9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-            <line x1="5" y1="12" x2="9" y2="12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-          </svg>
-          Climatizzazione multi-split con modulo idronico
-        </li>
-        <li class="feature-list__item">
-          <svg class="feature-icon" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <rect x="2" y="2" width="7" height="7" rx="0.8" stroke="currentColor" stroke-width="1.6"/>
-            <rect x="11" y="2" width="7" height="7" rx="0.8" stroke="currentColor" stroke-width="1.6"/>
-            <rect x="2" y="11" width="7" height="7" rx="0.8" stroke="currentColor" stroke-width="1.6"/>
-            <rect x="11" y="11" width="7" height="7" rx="0.8" stroke="currentColor" stroke-width="1.6"/>
-          </svg>
-          Pavimenti e sanitari completi
-        </li>
-      </ul>
-    </div>
+    <!-- Inner wrapper (max-width container) -->
+    <div class="landing__inner">
 
-    <!-- CTA Tour -->
-    <div class="cta-section fade-in-4">
-      <button id="btn-start-tour" class="btn btn--primary btn--block" aria-label="Avvia il tour virtuale 360°">
-        Esplora il tour virtuale 360°
-      </button>
-    </div>
+      <!-- Stats -->
+      <div class="stats-wrap">
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-value">83</div>
+            <div class="stat-label">mq</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">3</div>
+            <div class="stat-label">Locali</div>
+          </div>
+          <div class="stat-item stat-item--energy">
+            <div class="stat-value">A</div>
+            <div class="stat-label">Classe<br>Energetica</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value stat-value--sm">Lug&nbsp;'26</div>
+            <div class="stat-label">Consegna</div>
+          </div>
+        </div>
+      </div>
 
+      <!-- Features -->
+      <div class="features-section">
+        <div class="section-header">
+          <span class="section-header__label">Dotazioni incluse</span>
+          <div class="section-header__line" aria-hidden="true"></div>
+        </div>
+        <ul class="feature-list">
+          <li class="feature-list__item">Ingresso indipendente</li>
+          <li class="feature-list__item">Box auto</li>
+          <li class="feature-list__item">Infissi FINSTRAL ad elevato isolamento termoacustico</li>
+          <li class="feature-list__item">Climatizzazione multi-split con modulo idronico</li>
+          <li class="feature-list__item feature-list__item--last">Pavimenti e sanitari completi</li>
+        </ul>
+      </div>
+
+      <!-- Tour CTA -->
+      <div class="cta-section">
+        <button id="btn-start-tour" class="btn-tour" aria-label="Avvia il tour virtuale 360°">
+          <div class="btn-tour__icon" aria-hidden="true">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#0A0A0A" stroke-width="1.7" stroke-linecap="round" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="12" cy="12" r="10"></circle>
+              <ellipse cx="12" cy="12" rx="4" ry="10"></ellipse>
+              <line x1="2" y1="12" x2="22" y2="12"></line>
+            </svg>
+          </div>
+          <div class="btn-tour__text">
+            <div class="btn-tour__title">Tour Virtuale 360°</div>
+            <div class="btn-tour__sub">Esplora ogni stanza in autonomia</div>
+          </div>
+          <svg class="btn-tour__chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(10,10,10,0.45)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M9 18l6-6-6-6"></path>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Prima & Dopo -->
+      <div class="prima-dopo">
+        <div class="section-header">
+          <span class="section-header__label">Prima &amp; Dopo</span>
+          <div class="section-header__line" aria-hidden="true"></div>
+        </div>
+
+        <div class="pd-list">
+
+          <!-- Camera padronale -->
+          <div class="pd-item">
+            <p class="pd-item__label">Camera padronale</p>
+            <div class="pd-grid">
+              <div class="pd-cell">
+                <img src="assets/camera_padronale.jpg" alt="Camera vuota" loading="lazy" class="pd-cell__img">
+                <div class="pd-cell__tag pd-cell__tag--before">Vuoto</div>
+              </div>
+              <div class="pd-cell">
+                <img src="assets/render-camera-arredata.webp" alt="Camera arredata" loading="lazy" class="pd-cell__img">
+                <div class="pd-cell__tag pd-cell__tag--after">Arredato</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Soggiorno -->
+          <div class="pd-item">
+            <p class="pd-item__label">Soggiorno</p>
+            <div class="pd-grid">
+              <div class="pd-cell">
+                <img src="assets/finestra_salotto_int_pre.jpg" alt="Soggiorno vuoto" loading="lazy" class="pd-cell__img">
+                <div class="pd-cell__tag pd-cell__tag--before">Vuoto</div>
+              </div>
+              <div class="pd-cell">
+                <img src="assets/render-soggiorno-divano.webp" alt="Soggiorno arredato" loading="lazy" class="pd-cell__img">
+                <div class="pd-cell__tag pd-cell__tag--after">Arredato</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bagno -->
+          <div class="pd-item">
+            <p class="pd-item__label">Bagno</p>
+            <div class="pd-grid">
+              <div class="pd-cell">
+                <img src="assets/bagno_1.jpg" alt="Bagno vuoto" loading="lazy" class="pd-cell__img">
+                <div class="pd-cell__tag pd-cell__tag--before">Vuoto</div>
+              </div>
+              <div class="pd-cell">
+                <img src="assets/foto_bagno_arredata.png" alt="Bagno arredato" loading="lazy" class="pd-cell__img">
+                <div class="pd-cell__tag pd-cell__tag--after">Arredato</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div><!-- /landing__inner -->
   </main>
 
-  <!-- ══════════════════ VIEWER 360 (fase 2 – lazy) ══════════════════ -->
+
+  <!-- ══════════════════ VIEWER 360 ══════════════════ -->
   <div id="viewer-wrapper" class="viewer-wrapper" hidden aria-label="Tour virtuale 360°" role="region">
 
-    <!-- Barra navigazione scene -->
     <nav class="scene-nav" aria-label="Naviga tra le stanze">
-      <div class="scene-nav__scroll">
+      <div class="scene-nav__scroll no-scrollbar">
         <button class="scene-btn active" data-scene="soggiorno" aria-pressed="true">Zona Giorno</button>
         <button class="scene-btn"        data-scene="cucina"    aria-pressed="false">Cucina</button>
-        <button class="scene-btn"        data-scene="camera"    aria-pressed="false">Camera Padronale</button>
-        <button class="scene-btn"        data-scene="camera2"   aria-pressed="false">Seconda Camera</button>
+        <button class="scene-btn"        data-scene="camera"    aria-pressed="false">Camera Pad.</button>
+        <button class="scene-btn"        data-scene="camera2"   aria-pressed="false">2ª Camera</button>
         <button class="scene-btn"        data-scene="bagno1"    aria-pressed="false">Bagno 1</button>
         <button class="scene-btn"        data-scene="bagno2"    aria-pressed="false">Bagno 2</button>
       </div>
-      <button id="btn-back-landing" class="scene-btn scene-btn--back" aria-label="Torna alla scheda">✕</button>
+      <button id="btn-back-landing" class="scene-btn--back" aria-label="Chiudi tour">✕</button>
     </nav>
 
-    <!-- Canvas Pannellum -->
-    <div id="viewer" class="viewer" role="img" aria-label="Panorama 360° della stanza"></div>
+    <div id="viewer" role="img" aria-label="Panorama 360° della stanza"></div>
 
   </div>
 
+
   <!-- ══════════════════ MODALE VIRTUAL STAGING ══════════════════ -->
-  <div id="staging-modal" class="modal" hidden
-       role="dialog" aria-modal="true" aria-label="Come potrebbe essere questa stanza">
+  <div id="staging-modal" class="modal" hidden role="dialog" aria-modal="true" aria-label="Virtual staging">
     <div class="modal__backdrop" id="modal-backdrop"></div>
     <div class="modal__content">
-      <button id="modal-close" class="modal__close" aria-label="Chiudi">✕</button>
-      <p class="modal__title" id="modal-title">Come potrebbe essere</p>
+      <div class="modal__header">
+        <p class="modal__title" id="modal-title"></p>
+        <button id="modal-close" class="modal__close" aria-label="Chiudi">✕</button>
+      </div>
       <img id="modal-img" src="" alt="" class="modal__img"
            onerror="this.src='assets/placeholder-render.svg'; this.onerror=null;">
     </div>
   </div>
 
-  <!-- ══════════════════════ STICKY BOTTONI ══════════════════════ -->
+
+  <!-- ══════════════════ STICKY BAR ══════════════════ -->
   <div id="sticky-actions" class="sticky-bar">
-    <a id="wa-sticky" href="" class="btn btn--whatsapp"
-       target="_blank" rel="noopener noreferrer"
-       aria-label="Contattami su WhatsApp">
+    <a id="wa-sticky" href="" class="btn-wa" target="_blank" rel="noopener noreferrer" aria-label="Contattami su WhatsApp">
+      <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path>
+      </svg>
       WhatsApp
     </a>
-    <a href="tel:+393384346876" class="btn btn--call"
-       aria-label="Chiama il 338 434 6876">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
-           stroke-linecap="round" stroke-linejoin="round"
-           width="22" height="22" aria-hidden="true">
-        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 3.07 9.8a19.79 19.79 0 0 1-3.06-8.62A2 2 0 0 1 2 0h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L6.09 7.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 14v2.92z"/>
+    <a href="tel:+393384346876" class="btn-call" aria-label="Chiama il 338 434 6876">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#EDE8E0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20" aria-hidden="true">
+        <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.01 1.18 2 2 0 012 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14v2.92z"></path>
       </svg>
     </a>
   </div>
