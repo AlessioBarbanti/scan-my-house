@@ -6,7 +6,7 @@
     "pitch": 2,
     "yaw":   -30,
     "label": "Vedi zona divano arredata",
-    "render": "assets/foto_bagno_arredata.png"
+    "render": "assets/render/foto_bagno_arredata.png"
   },
   {
     "id":    "soggiorno-to-cucina",
@@ -24,7 +24,7 @@
     "pitch": -5,
     "yaw":   20,
     "label": "Vedi cucina arredata",
-    "render": "assets/render-cucina-arredata.webp"
+    "render": "assets/render/render-cucina-arredata.webp"
   },
   {
     "id":    "cucina-to-camera",
@@ -42,6 +42,6 @@
     "pitch": 5,
     "yaw":   10,
     "label": "Vedi camera arredata",
-    "render": "assets/render-camera-arredata.webp"
+    "render": "assets/render/render-camera-arredata.webp"
   }
 ]
