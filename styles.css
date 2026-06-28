@@ -174,6 +174,10 @@ body {
   overflow: hidden;
 }
 
+.stats-grid--3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
 .stat-item {
   background: #0A0A0A;
   padding: 18px 6px 16px;
@@ -241,33 +245,55 @@ body {
   display: flex;
   align-items: flex-start;
   gap: 16px;
-  padding: 15px 0;
+  padding: 16px 0;
   border-bottom: 1px solid rgba(255,255,255,0.05);
-  font-family: 'DM Sans', sans-serif;
-  font-size: 14px;
-  font-weight: 400;
-  color: #CAC5BE;
-  line-height: 1.55;
-}
-
-.feature-list__item::before {
-  content: '';
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: #C4A56A;
-  flex-shrink: 0;
-  margin-top: 6px;
 }
 
 .feature-list__item--last {
   border-bottom: none;
 }
 
+.feature-list__icon {
+  width: 42px;
+  height: 42px;
+  background: #131210;
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.feature-list__body { flex: 1; min-width: 0; }
+
+.feature-list__title {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #CAC5BE;
+  line-height: 1.3;
+  margin-bottom: 4px;
+}
+
+.feature-list__desc {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  color: #4A4845;
+  line-height: 1.55;
+}
+
 /* ── Tour CTA ───────────────────────────────────────────── */
 .cta-section {
   margin: 28px 16px 0;
   animation: fadeInUp 0.5s ease both 0.28s;
+}
+
+.cta-section--stacked {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .btn-tour {
@@ -317,6 +343,54 @@ body {
 }
 
 .btn-tour__chevron { flex-shrink: 0; }
+
+/* ── Piantina CTA ───────────────────────────────────────── */
+.btn-piantina {
+  width: 100%;
+  background: #161412;
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 14px;
+  padding: 18px 22px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+  box-sizing: border-box;
+}
+
+.btn-piantina:active { opacity: 0.88; }
+
+.btn-piantina__icon {
+  width: 52px;
+  height: 52px;
+  background: rgba(255,255,255,0.04);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.btn-piantina__text { flex: 1; min-width: 0; }
+
+.btn-piantina__title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.3rem;
+  line-height: 1.1;
+  color: #EDE8E0;
+  letter-spacing: -0.01em;
+}
+
+.btn-piantina__sub {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: rgba(237,232,224,0.32);
+  margin-top: 4px;
+}
+
+.btn-piantina__chevron { flex-shrink: 0; }
 
 /* ── Prima & Dopo ───────────────────────────────────────── */
 .prima-dopo {

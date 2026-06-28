@@ -170,6 +170,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   initWhatsApp();
 
+  // Deep-link dal QR code o dalla piantina (index.html#tour)
+  if (location.hash === '#tour') {
+    history.replaceState(null, '', location.pathname);
+    startTour();
+  }
+
   // Pulsante avvio tour
   document.getElementById('btn-start-tour')
     .addEventListener('click', startTour);

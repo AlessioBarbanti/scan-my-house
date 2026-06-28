@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0A0A0A">
+  <title>Piantina — Trilocale Via Paisiello</title>
+
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      font-family: 'DM Sans', system-ui, sans-serif;
+      background: #0A0A0A;
+      color: #EDE8E0;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes scaleIn {
+      from { opacity: 0; transform: scale(0.96); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+
+    /* ── Page shell ── */
+    .page {
+      background: #0A0A0A;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      max-width: 540px;
+      margin: 0 auto;
+    }
+
+    /* ── Header ── */
+    .page-header {
+      flex-shrink: 0;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      padding: max(env(safe-area-inset-top, 0px), 20px) 20px 0;
+      animation: fadeUp 0.5s ease both;
+    }
+
+    .page-header__back {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 50%;
+      text-decoration: none;
+      color: rgba(237,232,224,0.55);
+      flex-shrink: 0;
+      margin-top: 2px;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .page-header__back:active { opacity: 0.7; }
+
+    .page-header__eyebrow {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #4A4845;
+      margin-bottom: 5px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .page-header__eyebrow-line {
+      display: inline-block;
+      width: 18px;
+      height: 1px;
+      background: #4A4845;
+    }
+
+    .page-header__title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.8rem, 6vw, 2.2rem);
+      line-height: 1;
+      color: #EDE8E0;
+      letter-spacing: -0.02em;
+    }
+
+    /* ── Subtitle ── */
+    .page-subtitle {
+      flex-shrink: 0;
+      padding: 10px 20px 14px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      color: #4A4845;
+      line-height: 1.5;
+      animation: fadeUp 0.5s ease both 0.1s;
+    }
+
+    /* ── Floor plan container ── */
+    .floorplan-wrap {
+      flex: 1;
+      padding: 0 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      animation: fadeUp 0.6s ease both 0.14s;
+      padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+    }
+
+    /* ── Legend ── */
+    .legend {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      margin-bottom: 10px;
+      padding: 0 2px;
+    }
+
+    .legend__item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .legend__dot {
+      width: 14px;
+      height: 3px;
+      background: #C4A56A;
+      opacity: 0.55;
+      border-radius: 2px;
+    }
+
+    .legend__dot--circle {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #C4A56A;
+      opacity: 0.65;
+    }
+
+    .legend__sep {
+      width: 1px;
+      height: 10px;
+      background: rgba(255,255,255,0.06);
+      margin: 0 14px;
+    }
+
+    .legend__label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 9.5px;
+      color: #383430;
+      letter-spacing: 0.05em;
+    }
+
+    .legend__sqm {
+      margin-left: auto;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 9.5px;
+      color: #383430;
+    }
+
+    /* ── SVG wrapper ── */
+    .floorplan-svg-wrap {
+      background: #0F0F0F;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.05);
+      box-shadow: 0 8px 48px rgba(0,0,0,0.7);
+    }
+
+    .floorplan-svg-wrap svg {
+      width: 100%;
+      display: block;
+    }
+
+    /* ── Overlay ── */
+    .room-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.72);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      z-index: 99;
+    }
+
+    .room-overlay.is-open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* ── Bottom sheet ── */
+    .bottom-sheet {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #191919;
+      border-radius: 20px 20px 0 0;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      transform: translateY(110%);
+      transition: transform 0.38s cubic-bezier(0.32, 0.72, 0, 1);
+      z-index: 100;
+      padding-bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+      max-width: 540px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .bottom-sheet.is-open {
+      transform: translateY(0);
+    }
+
+    /* Handle */
+    .sheet-handle {
+      display: flex;
+      justify-content: center;
+      padding: 10px 0 0;
+    }
+
+    .sheet-handle__bar {
+      width: 36px;
+      height: 4px;
+      background: #2E2E2E;
+      border-radius: 2px;
+    }
+
+    /* Sheet header */
+    .sheet-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      padding: 14px 20px 0;
+    }
+
+    .sheet-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.6rem;
+      line-height: 1;
+      color: #EDE8E0;
+      letter-spacing: -0.02em;
+    }
+
+    .sheet-mq {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      color: #4A4845;
+      margin-left: 10px;
+      line-height: 1.6;
+    }
+
+    .sheet-close {
+      width: 32px;
+      height: 32px;
+      background: rgba(255,255,255,0.06);
+      border: none;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: #666;
+      font-size: 13px;
+      flex-shrink: 0;
+      -webkit-tap-highlight-color: transparent;
+      font-family: sans-serif;
+      margin-top: 2px;
+    }
+
+    .sheet-close:active { opacity: 0.6; }
+
+    /* Prima/Dopo toggle */
+    .toggle-wrap {
+      padding: 12px 20px 0;
+    }
+
+    .toggle {
+      display: inline-flex;
+      background: #141414;
+      border-radius: 30px;
+      padding: 3px;
+      gap: 2px;
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .toggle__btn {
+      border: none;
+      border-radius: 26px;
+      padding: 7px 18px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      transition: background 0.18s, color 0.18s;
+      background: transparent;
+      color: #55504A;
+    }
+
+    .toggle__btn.is-active-prima {
+      background: #EDE8E0;
+      color: #0A0A0A;
+    }
+
+    .toggle__btn.is-active-dopo {
+      background: #C4A56A;
+      color: #0A0A0A;
+    }
+
+    /* Render-in-arrivo badge */
+    .badge-arrivo {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: #1C1814;
+      border: 1px solid rgba(196,165,106,0.14);
+      border-radius: 20px;
+      padding: 5px 13px;
+      margin: 12px 20px 0;
+    }
+
+    .badge-arrivo__dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #C4A56A;
+      opacity: 0.55;
+      flex-shrink: 0;
+    }
+
+    .badge-arrivo__text {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px;
+      color: #7A7065;
+      letter-spacing: 0.04em;
+    }
+
+    /* Room image */
+    .sheet-img-wrap {
+      padding: 12px 20px 0;
+    }
+
+    .sheet-img {
+      width: 100%;
+      height: 220px;
+      border-radius: 14px;
+      object-fit: cover;
+      background: #1A1A1A;
+      display: block;
+    }
+
+    /* Tour CTA */
+    .sheet-tour-cta {
+      padding: 14px 20px 0;
+    }
+
+    .sheet-tour-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      height: 52px;
+      background: #C4A56A;
+      border-radius: 13px;
+      text-decoration: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .sheet-tour-btn:active { opacity: 0.88; }
+
+    .sheet-tour-btn__label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: #0A0A0A;
+      letter-spacing: 0.01em;
+    }
+  </style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- Header -->
+  <header class="page-header">
+    <div>
+      <p class="page-header__eyebrow">
+        <span class="page-header__eyebrow-line" aria-hidden="true"></span>
+        Via Paisiello
+      </p>
+      <h1 class="page-header__title">Piantina</h1>
+    </div>
+    <a href="index.html" class="page-header__back" aria-label="Torna alla scheda">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M19 12H5M12 5l-7 7 7 7"></path>
+      </svg>
+    </a>
+  </header>
+
+  <!-- Subtitle -->
+  <p class="page-subtitle">Tocca una stanza per scoprire come sarà arredata</p>
+
+  <!-- Floor plan -->
+  <div class="floorplan-wrap">
+
+    <!-- Legend -->
+    <div class="legend" aria-hidden="true">
+      <div class="legend__item">
+        <div class="legend__dot"></div>
+        <span class="legend__label">Finestre</span>
+      </div>
+      <div class="legend__sep"></div>
+      <div class="legend__item">
+        <div class="legend__dot--circle"></div>
+        <span class="legend__label">Render disponibile</span>
+      </div>
+      <span class="legend__sqm">83 mq · 3 locali</span>
+    </div>
+
+    <!-- SVG floor plan -->
+    <div class="floorplan-svg-wrap">
+      <svg viewBox="0 0 320 430" aria-label="Piantina interattiva dell'appartamento" role="img">
+
+        <!-- Floor base -->
+        <rect width="320" height="430" fill="#0D0D0D"/>
+
+        <!-- ─── ROOM FILLS (interactive) ─── -->
+        <rect id="fill-soggiorno" x="0" y="0" width="210" height="175" fill="#28241B" class="room-fill" data-room="soggiorno" style="cursor:pointer" role="button" aria-label="Soggiorno"/>
+        <rect id="fill-cucina" x="210" y="0" width="110" height="175" fill="#22201A" class="room-fill" data-room="cucina" style="cursor:pointer" role="button" aria-label="Cucina"/>
+        <rect id="fill-bagno2" x="0" y="175" width="90" height="80" fill="#192025" class="room-fill" data-room="bagno2" style="cursor:pointer" role="button" aria-label="Bagno 2"/>
+        <rect x="90" y="175" width="120" height="80" fill="#141414"/>
+        <rect id="fill-bagno1" x="210" y="175" width="110" height="80" fill="#1A2126" class="room-fill" data-room="bagno1" style="cursor:pointer" role="button" aria-label="Bagno 1"/>
+        <rect id="fill-cameraPad" x="0" y="255" width="160" height="175" fill="#1E1C27" class="room-fill" data-room="cameraPad" style="cursor:pointer" role="button" aria-label="Camera Padronale"/>
+        <rect id="fill-camera2" x="160" y="255" width="160" height="175" fill="#1C1D26" class="room-fill" data-room="camera2" style="cursor:pointer" role="button" aria-label="2ª Camera"/>
+
+        <!-- ─── SELECTION HIGHLIGHTS ─── -->
+        <rect id="sel-soggiorno" x="0" y="0" width="210" height="175" fill="none" stroke="#C4A56A" stroke-width="2.5" opacity="0" style="pointer-events:none"/>
+        <rect id="sel-cucina" x="210" y="0" width="110" height="175" fill="none" stroke="#C4A56A" stroke-width="2.5" opacity="0" style="pointer-events:none"/>
+        <rect id="sel-bagno2" x="0" y="175" width="90" height="80" fill="none" stroke="#C4A56A" stroke-width="2.5" opacity="0" style="pointer-events:none"/>
+        <rect id="sel-bagno1" x="210" y="175" width="110" height="80" fill="none" stroke="#C4A56A" stroke-width="2.5" opacity="0" style="pointer-events:none"/>
+        <rect id="sel-cameraPad" x="0" y="255" width="160" height="175" fill="none" stroke="#C4A56A" stroke-width="2.5" opacity="0" style="pointer-events:none"/>
+        <rect id="sel-camera2" x="160" y="255" width="160" height="175" fill="none" stroke="#C4A56A" stroke-width="2.5" opacity="0" style="pointer-events:none"/>
+
+        <!-- ─── WALLS ─── -->
+        <rect x="0" y="0" width="320" height="430" fill="none" stroke="#383832" stroke-width="5"/>
+        <line x1="0" y1="175" x2="320" y2="175" stroke="#383832" stroke-width="3"/>
+        <line x1="0" y1="255" x2="320" y2="255" stroke="#383832" stroke-width="3"/>
+        <line x1="210" y1="0" x2="210" y2="255" stroke="#383832" stroke-width="3"/>
+        <line x1="90" y1="175" x2="90" y2="255" stroke="#383832" stroke-width="3"/>
+        <line x1="160" y1="255" x2="160" y2="430" stroke="#383832" stroke-width="3"/>
+
+        <!-- ─── WINDOWS ─── -->
+        <line x1="28" y1="1" x2="90" y2="1" stroke="#C4A56A" stroke-width="2.5" stroke-opacity="0.5"/>
+        <line x1="110" y1="1" x2="170" y2="1" stroke="#C4A56A" stroke-width="2.5" stroke-opacity="0.5"/>
+        <line x1="228" y1="1" x2="298" y2="1" stroke="#C4A56A" stroke-width="2.5" stroke-opacity="0.5"/>
+        <line x1="1" y1="28" x2="1" y2="110" stroke="#C4A56A" stroke-width="2.5" stroke-opacity="0.5"/>
+        <line x1="1" y1="290" x2="1" y2="380" stroke="#C4A56A" stroke-width="2.5" stroke-opacity="0.5"/>
+        <line x1="319" y1="185" x2="319" y2="245" stroke="#C4A56A" stroke-width="2.5" stroke-opacity="0.5"/>
+        <line x1="319" y1="295" x2="319" y2="390" stroke="#C4A56A" stroke-width="2.5" stroke-opacity="0.5"/>
+        <line x1="28" y1="429" x2="110" y2="429" stroke="#C4A56A" stroke-width="2.5" stroke-opacity="0.5"/>
+        <line x1="185" y1="429" x2="290" y2="429" stroke="#C4A56A" stroke-width="2.5" stroke-opacity="0.5"/>
+
+        <!-- ─── DOOR (ingresso) ─── -->
+        <line x1="92" y1="253" x2="150" y2="253" stroke="#1C1C1C" stroke-width="4"/>
+        <path d="M 92 255 A 58 58 0 0 1 150 255" fill="none" stroke="#2A2A2A" stroke-width="1.5"/>
+
+        <!-- ─── RENDER-AVAILABLE DOTS ─── -->
+        <circle cx="198" cy="12" r="4" fill="#C4A56A" fill-opacity="0.65" style="pointer-events:none"/>
+        <circle cx="308" cy="12" r="4" fill="#C4A56A" fill-opacity="0.65" style="pointer-events:none"/>
+        <circle cx="308" cy="187" r="4" fill="#C4A56A" fill-opacity="0.65" style="pointer-events:none"/>
+        <circle cx="148" cy="267" r="4" fill="#C4A56A" fill-opacity="0.65" style="pointer-events:none"/>
+
+        <!-- ─── LABELS ─── -->
+        <text x="105" y="76" text-anchor="middle" fill="#CAC5BE" font-family="DM Sans,sans-serif" font-size="13" font-weight="500" style="pointer-events:none">Soggiorno</text>
+        <text x="105" y="92" text-anchor="middle" fill="#3A3630" font-family="DM Sans,sans-serif" font-size="9" style="pointer-events:none">Zona giorno · ~25 mq</text>
+
+        <text x="265" y="79" text-anchor="middle" fill="#CAC5BE" font-family="DM Sans,sans-serif" font-size="12" font-weight="500" style="pointer-events:none">Cucina</text>
+        <text x="265" y="94" text-anchor="middle" fill="#3A3630" font-family="DM Sans,sans-serif" font-size="9" style="pointer-events:none">~12 mq</text>
+
+        <text x="45" y="210" text-anchor="middle" fill="#9A9590" font-family="DM Sans,sans-serif" font-size="9" font-weight="500" style="pointer-events:none">Bagno 2</text>
+        <text x="45" y="222" text-anchor="middle" fill="#3A3630" font-family="DM Sans,sans-serif" font-size="8" style="pointer-events:none">~5 mq</text>
+
+        <text x="150" y="213" text-anchor="middle" fill="#292522" font-family="DM Sans,sans-serif" font-size="9" style="pointer-events:none">Ingresso</text>
+
+        <text x="265" y="210" text-anchor="middle" fill="#9A9590" font-family="DM Sans,sans-serif" font-size="9" font-weight="500" style="pointer-events:none">Bagno 1</text>
+        <text x="265" y="222" text-anchor="middle" fill="#3A3630" font-family="DM Sans,sans-serif" font-size="8" style="pointer-events:none">~7 mq</text>
+
+        <text x="80" y="333" text-anchor="middle" fill="#CAC5BE" font-family="DM Sans,sans-serif" font-size="11" font-weight="500" style="pointer-events:none">Camera</text>
+        <text x="80" y="348" text-anchor="middle" fill="#CAC5BE" font-family="DM Sans,sans-serif" font-size="11" font-weight="500" style="pointer-events:none">Padronale</text>
+        <text x="80" y="362" text-anchor="middle" fill="#3A3630" font-family="DM Sans,sans-serif" font-size="9" style="pointer-events:none">~18 mq</text>
+
+        <text x="240" y="336" text-anchor="middle" fill="#CAC5BE" font-family="DM Sans,sans-serif" font-size="11" font-weight="500" style="pointer-events:none">2ª Camera</text>
+        <text x="240" y="351" text-anchor="middle" fill="#3A3630" font-family="DM Sans,sans-serif" font-size="9" style="pointer-events:none">~14 mq</text>
+
+        <!-- North indicator -->
+        <g transform="translate(298,416)">
+          <circle cx="0" cy="0" r="11" fill="rgba(0,0,0,0.55)" stroke="#222" stroke-width="1"/>
+          <line x1="0" y1="-3" x2="0" y2="-8" stroke="#C4A56A" stroke-width="1.5" stroke-opacity="0.7"/>
+          <text x="0" y="5" text-anchor="middle" fill="#4A4845" font-family="DM Sans,sans-serif" font-size="8" font-weight="600" style="pointer-events:none">N</text>
+        </g>
+
+      </svg>
+    </div>
+
+  </div>
+</div>
+
+<!-- Overlay -->
+<div id="room-overlay" class="room-overlay" aria-hidden="true"></div>
+
+<!-- Bottom sheet -->
+<div id="bottom-sheet" class="bottom-sheet" role="dialog" aria-modal="true" aria-label="Dettaglio stanza" hidden>
+
+  <div class="sheet-handle" aria-hidden="true">
+    <div class="sheet-handle__bar"></div>
+  </div>
+
+  <div class="sheet-header">
+    <div>
+      <span id="sheet-title" class="sheet-title"></span>
+      <span id="sheet-mq" class="sheet-mq"></span>
+    </div>
+    <button id="sheet-close" class="sheet-close" aria-label="Chiudi">✕</button>
+  </div>
+
+  <!-- Prima/Dopo toggle (shown only when render is available) -->
+  <div id="toggle-wrap" class="toggle-wrap" hidden>
+    <div class="toggle">
+      <button id="btn-prima" class="toggle__btn" data-mode="prima">Prima</button>
+      <button id="btn-dopo" class="toggle__btn is-active-dopo" data-mode="dopo">Arredato</button>
+    </div>
+  </div>
+
+  <!-- Render-in-arrivo badge (shown when no render) -->
+  <div id="badge-arrivo" class="badge-arrivo" hidden>
+    <div class="badge-arrivo__dot" aria-hidden="true"></div>
+    <span class="badge-arrivo__text">Render in arrivo</span>
+  </div>
+
+  <!-- Room image -->
+  <div class="sheet-img-wrap">
+    <img id="sheet-img" src="" alt="" class="sheet-img" loading="lazy">
+  </div>
+
+  <!-- Tour CTA -->
+  <div class="sheet-tour-cta">
+    <a href="index.html#tour" id="sheet-tour-btn" class="sheet-tour-btn" rel="noopener">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#383832" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="10"></circle>
+        <ellipse cx="12" cy="12" rx="4" ry="10"></ellipse>
+        <line x1="2" y1="12" x2="22" y2="12"></line>
+      </svg>
+      <span class="sheet-tour-btn__label">Tour virtuale 360°</span>
+    </a>
+  </div>
+
+</div>
+
+<script src="piantina.js" defer></script>
+</body>
+</html>
