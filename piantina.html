@@ -78,7 +78,7 @@
       font-weight: 500;
       letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: #4A4845;
+      color: #6B6660;
       margin-bottom: 5px;
       display: flex;
       align-items: center;
@@ -106,7 +106,7 @@
       padding: 10px 20px 14px;
       font-family: 'DM Sans', sans-serif;
       font-size: 13px;
-      color: #4A4845;
+      color: #7A756F;
       line-height: 1.5;
       animation: fadeUp 0.5s ease both 0.1s;
     }
@@ -140,18 +140,12 @@
     .legend__dot {
       width: 14px;
       height: 3px;
-      background: #C4A56A;
-      opacity: 0.55;
       border-radius: 2px;
     }
 
-    .legend__dot--circle {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: #C4A56A;
-      opacity: 0.65;
-    }
+    .legend__dot--window { background: #3A5B6E; }
+    .legend__dot--door   { background: #6A6560; }
+
 
     .legend__sep {
       width: 1px;
@@ -163,7 +157,7 @@
     .legend__label {
       font-family: 'DM Sans', sans-serif;
       font-size: 9.5px;
-      color: #383430;
+      color: #6B6660;
       letter-spacing: 0.05em;
     }
 
@@ -171,8 +165,10 @@
       margin-left: auto;
       font-family: 'DM Sans', sans-serif;
       font-size: 9.5px;
-      color: #383430;
+      color: #6B6660;
     }
+
+    .room-fill { cursor: pointer; }
 
     /* ── SVG wrapper ── */
     .floorplan-svg-wrap {
@@ -259,7 +255,7 @@
     .sheet-mq {
       font-family: 'DM Sans', sans-serif;
       font-size: 12px;
-      color: #4A4845;
+      color: #6B6660;
       margin-left: 10px;
       line-height: 1.6;
     }
@@ -283,72 +279,6 @@
     }
 
     .sheet-close:active { opacity: 0.6; }
-
-    /* Prima/Dopo toggle */
-    .toggle-wrap {
-      padding: 12px 20px 0;
-    }
-
-    .toggle {
-      display: inline-flex;
-      background: #141414;
-      border-radius: 30px;
-      padding: 3px;
-      gap: 2px;
-      border: 1px solid rgba(255,255,255,0.05);
-    }
-
-    .toggle__btn {
-      border: none;
-      border-radius: 26px;
-      padding: 7px 18px;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 13px;
-      font-weight: 500;
-      cursor: pointer;
-      -webkit-tap-highlight-color: transparent;
-      transition: background 0.18s, color 0.18s;
-      background: transparent;
-      color: #55504A;
-    }
-
-    .toggle__btn.is-active-prima {
-      background: #EDE8E0;
-      color: #0A0A0A;
-    }
-
-    .toggle__btn.is-active-dopo {
-      background: #C4A56A;
-      color: #0A0A0A;
-    }
-
-    /* Render-in-arrivo badge */
-    .badge-arrivo {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      background: #1C1814;
-      border: 1px solid rgba(196,165,106,0.14);
-      border-radius: 20px;
-      padding: 5px 13px;
-      margin: 12px 20px 0;
-    }
-
-    .badge-arrivo__dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: #C4A56A;
-      opacity: 0.55;
-      flex-shrink: 0;
-    }
-
-    .badge-arrivo__text {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 11px;
-      color: #7A7065;
-      letter-spacing: 0.04em;
-    }
 
     /* Room image */
     .sheet-img-wrap {
@@ -421,101 +351,154 @@
     <!-- Legend -->
     <div class="legend" aria-hidden="true">
       <div class="legend__item">
-        <div class="legend__dot"></div>
+        <div class="legend__dot legend__dot--window"></div>
         <span class="legend__label">Finestre</span>
       </div>
       <div class="legend__sep"></div>
       <div class="legend__item">
-        <div class="legend__dot--circle"></div>
-        <span class="legend__label">Render disponibile</span>
+        <div class="legend__dot legend__dot--door"></div>
+        <span class="legend__label">Porte</span>
       </div>
       <span class="legend__sqm">83 mq · 3 locali</span>
     </div>
 
     <!-- SVG floor plan -->
     <div class="floorplan-svg-wrap">
-      <svg viewBox="0 0 320 430" aria-label="Piantina interattiva dell'appartamento" role="img">
+      
+<svg id="Livello_1" data-name="Livello 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 219.22 335.53">
+  <defs>
+    <style>
+      /* Text labels */
+      .label { font-family: 'DM Serif Display', serif; font-style: italic; font-size: 9.5px; fill: #5A5550; }
 
-        <!-- Floor base -->
-        <rect width="320" height="430" fill="#0D0D0D"/>
+      /* Room fills */
+      .room  { fill: #161410; stroke: #3A3530; stroke-width: 3px; stroke-miterlimit: 10; }
 
-        <!-- ─── ROOM FILLS (interactive) ─── -->
-        <rect id="fill-soggiorno" x="0" y="0" width="210" height="175" fill="#28241B" class="room-fill" data-room="soggiorno" style="cursor:pointer" role="button" aria-label="Soggiorno"/>
-        <rect id="fill-cucina" x="210" y="0" width="110" height="175" fill="#22201A" class="room-fill" data-room="cucina" style="cursor:pointer" role="button" aria-label="Cucina"/>
-        <rect id="fill-bagno2" x="0" y="175" width="90" height="80" fill="#192025" class="room-fill" data-room="bagno2" style="cursor:pointer" role="button" aria-label="Bagno 2"/>
-        <rect x="90" y="175" width="120" height="80" fill="#141414"/>
-        <rect id="fill-bagno1" x="210" y="175" width="110" height="80" fill="#1A2126" class="room-fill" data-room="bagno1" style="cursor:pointer" role="button" aria-label="Bagno 1"/>
-        <rect id="fill-cameraPad" x="0" y="255" width="160" height="175" fill="#1E1C27" class="room-fill" data-room="cameraPad" style="cursor:pointer" role="button" aria-label="Camera Padronale"/>
-        <rect id="fill-camera2" x="160" y="255" width="160" height="175" fill="#1C1D26" class="room-fill" data-room="camera2" style="cursor:pointer" role="button" aria-label="2ª Camera"/>
+      /* Structural */
+      .wall   { fill: #2A2520; stroke: #3A3530; stroke-width: 3px; stroke-miterlimit: 10; }
+      .column { fill: #3A3530; stroke-width: 0px; }
 
-        <!-- ─── SELECTION HIGHLIGHTS ─── -->
-        <rect id="sel-soggiorno" x="0" y="0" width="210" height="175" fill="none" stroke="#C4A56A" stroke-width="2.5" opacity="0" style="pointer-events:none"/>
-        <rect id="sel-cucina" x="210" y="0" width="110" height="175" fill="none" stroke="#C4A56A" stroke-width="2.5" opacity="0" style="pointer-events:none"/>
-        <rect id="sel-bagno2" x="0" y="175" width="90" height="80" fill="none" stroke="#C4A56A" stroke-width="2.5" opacity="0" style="pointer-events:none"/>
-        <rect id="sel-bagno1" x="210" y="175" width="110" height="80" fill="none" stroke="#C4A56A" stroke-width="2.5" opacity="0" style="pointer-events:none"/>
-        <rect id="sel-cameraPad" x="0" y="255" width="160" height="175" fill="none" stroke="#C4A56A" stroke-width="2.5" opacity="0" style="pointer-events:none"/>
-        <rect id="sel-camera2" x="160" y="255" width="160" height="175" fill="none" stroke="#C4A56A" stroke-width="2.5" opacity="0" style="pointer-events:none"/>
+      /* Doors */
+      .door-opening { fill: none; stroke: #5E5A55; stroke-width: 3px; stroke-miterlimit: 10; }
+      .door-panel   { fill: none; stroke: #3A3530; stroke-miterlimit: 10; }
+      .door-swing   { fill: none; stroke: #3A3530; stroke-miterlimit: 10; stroke-linecap: square; stroke-width: .25px; }
+      .door-sliding { fill: #3A3530; stroke-width: 0px; }
 
-        <!-- ─── WALLS ─── -->
-        <rect x="0" y="0" width="320" height="430" fill="none" stroke="#383832" stroke-width="5"/>
-        <line x1="0" y1="175" x2="320" y2="175" stroke="#383832" stroke-width="3"/>
-        <line x1="0" y1="255" x2="320" y2="255" stroke="#383832" stroke-width="3"/>
-        <line x1="210" y1="0" x2="210" y2="255" stroke="#383832" stroke-width="3"/>
-        <line x1="90" y1="175" x2="90" y2="255" stroke="#383832" stroke-width="3"/>
-        <line x1="160" y1="255" x2="160" y2="430" stroke="#383832" stroke-width="3"/>
+      /* Windows */
+      .window { fill: #3A5B6E; stroke-width: 0px; }
+    </style>
+  </defs>
 
-        <!-- ─── WINDOWS ─── -->
-        <line x1="28" y1="1" x2="90" y2="1" stroke="#C4A56A" stroke-width="2.5" stroke-opacity="0.5"/>
-        <line x1="110" y1="1" x2="170" y2="1" stroke="#C4A56A" stroke-width="2.5" stroke-opacity="0.5"/>
-        <line x1="228" y1="1" x2="298" y2="1" stroke="#C4A56A" stroke-width="2.5" stroke-opacity="0.5"/>
-        <line x1="1" y1="28" x2="1" y2="110" stroke="#C4A56A" stroke-width="2.5" stroke-opacity="0.5"/>
-        <line x1="1" y1="290" x2="1" y2="380" stroke="#C4A56A" stroke-width="2.5" stroke-opacity="0.5"/>
-        <line x1="319" y1="185" x2="319" y2="245" stroke="#C4A56A" stroke-width="2.5" stroke-opacity="0.5"/>
-        <line x1="319" y1="295" x2="319" y2="390" stroke="#C4A56A" stroke-width="2.5" stroke-opacity="0.5"/>
-        <line x1="28" y1="429" x2="110" y2="429" stroke="#C4A56A" stroke-width="2.5" stroke-opacity="0.5"/>
-        <line x1="185" y1="429" x2="290" y2="429" stroke="#C4A56A" stroke-width="2.5" stroke-opacity="0.5"/>
+  <rect class="room" x="88.18" y=".08" width="110.55" height="113.39" transform="translate(86.68 200.23) rotate(-90)"/>
+  <line class="room" x1="81.6" y1="82.11" x2="62.6" y2="82.11"/>
+  <polyline class="room" points="62.6 82.11 52.52 82.11 52.52 1.85 86.54 1.85 86.54 82.11 81.6 82.11"/>
+  <polyline class="room" points="81.6 82.11 86.54 82.11 86.54 112.05 52.52 112.05 52.52 82.11 62.6 82.11"/>
+  <rect class="room" x="-8.42" y="51.11" width="70.87" height="51.02" transform="translate(-49.61 103.63) rotate(-90)"/>
+  <polygon class="room" points="1.51 111.97 200.15 111.97 200.15 211.2 200.15 214.02 166.13 214.02 166.13 201 71.52 201.27 71.52 214.02 38.22 214.02 1.51 214.02 1.51 111.97"/>
+  <line class="room" x1="1.51" y1="214.05" x2="71.52" y2="214.05"/>
+  <polygon class="room" points="166.13 201.03 166.13 245.89 71.52 245.89 71.52 214.36 71.52 201.3 166.13 201.03"/>
+  <rect class="room" x="38.99" y="213.36" width="31.84" height="33.22" transform="translate(-175.06 284.88) rotate(-90)"/>
+  <rect class="room" x="-7.18" y="222.74" width="54.17" height="36.79" transform="translate(-221.23 261.04) rotate(-90)"/>
+  <polyline class="room" points="200.15 214.05 200.15 334 166.13 334 166.13 214.05 200.15 213.57"/>
+  <rect class="column" x="121.83" y="1.13" width="11.46" height="11.46" transform="translate(120.7 134.41) rotate(-90)"/>
+  <polygon class="room" points="166.12 245.89 166.12 334 54.9 334 54.9 296.66 1.5 296.66 1.5 268.22 38.29 268.22 38.29 245.89 166.12 245.89"/>
+  <rect class="column" x="134.3" y="324.07" width="11.46" height="11.46" transform="translate(-189.77 469.83) rotate(-90)"/>
+  <g>
+    <path class="door-swing" d="M81.6,63.11c-1.47.05-7.95.41-13.33,5.67-5.45,5.32-5.93,11.88-6,13.33"/>
+    <path class="door-panel" d="M81.6,82.11v-19"/>
+    <path class="door-opening" d="M62.27,82.11h19.33"/>
+  </g>
+  <g>
+    <path class="door-swing" d="M105.54,106.94c-.05-1.47-.41-7.95-5.67-13.33-5.32-5.45-11.88-5.93-13.33-6"/>
+    <path class="door-panel" d="M86.54,106.94h19"/>
+    <path class="door-opening" d="M86.54,87.61v19.33"/>
+  </g>
+  <g>
+    <path class="door-swing" d="M33.3,106.94c.05-1.47.41-7.95,5.67-13.33,5.32-5.45,11.88-5.93,13.33-6"/>
+    <path class="door-panel" d="M52.3,106.94h-19"/>
+    <path class="door-opening" d="M52.3,87.61v19.33"/>
+  </g>
+  <g>
+    <path class="door-swing" d="M19.22,220.3c.05,1.47.41,7.95,5.67,13.33,5.32,5.45,11.88,5.93,13.33,6"/>
+    <path class="door-panel" d="M38.22,220.3h-19"/>
+    <path class="door-opening" d="M38.22,239.63v-19.33"/>
+  </g>
+  <g>
+    <path class="door-swing" d="M90.6,222.3c-.05,1.47-.41,7.95-5.67,13.33-5.32,5.45-11.88,5.93-13.33,6"/>
+    <path class="door-panel" d="M71.6,222.3h19"/>
+    <path class="door-opening" d="M71.6,241.63v-19.33"/>
+  </g>
+  <g>
+    <path class="door-swing" d="M42.86,264.89c1.47-.05,7.95-.41,13.33-5.67,5.45-5.32,5.93-11.88,6-13.33"/>
+    <path class="door-panel" d="M42.86,245.89v19"/>
+    <path class="door-opening" d="M62.19,245.89h-19.33"/>
+  </g>
+  <g>
+    <path class="door-swing" d="M196.15,189.5c-1.9.06-10.27.53-17.23,7.32-7.05,6.88-7.66,15.36-7.75,17.23"/>
+    <path class="door-panel" d="M196.15,214.05v-24.55"/>
+    <path class="door-opening" d="M171.17,214.05h24.98"/>
+  </g>
+  <rect class="column" x="121.83" y="111.01" width="11.46" height="11.46" transform="translate(10.81 244.29) rotate(-90)"/>
+  <polygon class="column" points="140.91 212.29 140.91 223.75 129.45 223.75 129.45 212.29 140.56 212.29 140.91 212.29"/>
+  <line class="wall" x1="139.39" y1="201.77" x2="139.39" y2="212.96"/>
+  <g>
+    <rect class="column" x="41.79" y="213.19" width="21.93" height="1.71"/>
+    <path class="door-sliding" d="M63.1,213.82v.46h-20.68v-.46h20.68M64.35,212.57h-23.18v2.96h23.18v-2.96h0Z"/>
+  </g>
+  <g>
+    <rect class="column" x="58.57" y="111.12" width="21.93" height="1.71"/>
+    <path class="door-sliding" d="M79.87,111.74v.46h-20.68v-.46h20.68M81.12,110.49h-23.18v2.96h23.18v-2.96h0Z"/>
+  </g>
+  <g>
+    <rect class="column" x="165.27" y="266.61" width="1.71" height="41.67"/>
+    <path class="window" d="M166.35,267.23v40.42h-.46v-40.42h.46M167.6,265.98h-2.96v42.92h2.96v-42.92h0Z"/>
+  </g>
+  <g>
+    <rect class="column" x="165.28" y="220.17" width="1.71" height="20.21"/>
+    <path class="window" d="M166.36,220.79v18.96h-.46v-18.96h.46M167.61,219.54h-2.96v21.46h2.96v-21.46h0Z"/>
+  </g>
+  <g>
+    <rect class="column" x="199.29" y="130" width="1.71" height="61.16"/>
+    <path class="window" d="M200.37,130.62v59.91h-.46v-59.91h.46M201.62,129.37h-2.96v62.41h2.96v-62.41h0Z"/>
+  </g>
+  <g>
+    <rect class="column" x="199.29" y="39.94" width="1.71" height="41.27"/>
+    <path class="window" d="M200.37,40.57v40.02h-.46v-40.02h.46M201.62,39.32h-2.96v42.52h2.96v-42.52h0Z"/>
+  </g>
+  <!-- Room fill overlays (below text so labels remain readable) -->
+  <g id="room-fills">
+    <rect id="fill-cameraPad" x="87"   y="1.5"  width="113"  height="110.5" fill="#161410" opacity="0"/>
+    <rect id="fill-bagno1"    x="1.5"  y="1.5"  width="85"   height="110.5" fill="#161410" opacity="0"/>
+    <rect id="fill-soggiorno" x="1.5"  y="112"  width="198.5" height="89"   fill="#161410" opacity="0"/>
+    <rect id="fill-bagno2"    x="71.5" y="201"  width="94.5" height="44.9"  fill="#161410" opacity="0"/>
+    <polygon id="fill-camera2" points="166.12,245.89 166.12,334 54.9,334 54.9,296.66 1.5,296.66 1.5,268.22 38.29,268.22 38.29,245.89" fill="#161410" opacity="0"/>
+  </g>
 
-        <!-- ─── DOOR (ingresso) ─── -->
-        <line x1="92" y1="253" x2="150" y2="253" stroke="#1C1C1C" stroke-width="4"/>
-        <path d="M 92 255 A 58 58 0 0 1 150 255" fill="none" stroke="#2A2A2A" stroke-width="1.5"/>
+  <text class="label" transform="translate(188.4 312.6) rotate(-90)">Ingresso esterno</text>
+  <text class="label" transform="translate(58.33 161.18)">Soggiorno e cucina</text>
+  <text class="label" transform="translate(106.63 62.55)">Camera da letto</text>
+  <text class="label" transform="translate(70.82 284.63)">Camera da letto</text>
+  <text class="label" transform="translate(99.43 234.56)">Bagno</text>
+  <text class="label" transform="translate(13.65 75.21)">Bagno</text>
 
-        <!-- ─── RENDER-AVAILABLE DOTS ─── -->
-        <circle cx="198" cy="12" r="4" fill="#C4A56A" fill-opacity="0.65" style="pointer-events:none"/>
-        <circle cx="308" cy="12" r="4" fill="#C4A56A" fill-opacity="0.65" style="pointer-events:none"/>
-        <circle cx="308" cy="187" r="4" fill="#C4A56A" fill-opacity="0.65" style="pointer-events:none"/>
-        <circle cx="148" cy="267" r="4" fill="#C4A56A" fill-opacity="0.65" style="pointer-events:none"/>
+  <!-- Selection rings -->
+  <g id="room-selections" pointer-events="none">
+    <rect id="sel-cameraPad" x="87"   y="1.5"  width="113"  height="110.5" fill="none" stroke="#C4A56A" stroke-width="1.5" opacity="0"/>
+    <rect id="sel-bagno1"    x="1.5"  y="1.5"  width="85"   height="110.5" fill="none" stroke="#C4A56A" stroke-width="1.5" opacity="0"/>
+    <rect id="sel-soggiorno" x="1.5"  y="112"  width="198.5" height="89"   fill="none" stroke="#C4A56A" stroke-width="1.5" opacity="0"/>
+    <rect id="sel-bagno2"    x="71.5" y="201"  width="94.5" height="44.9"  fill="none" stroke="#C4A56A" stroke-width="1.5" opacity="0"/>
+    <polygon id="sel-camera2" points="166.12,245.89 166.12,334 54.9,334 54.9,296.66 1.5,296.66 1.5,268.22 38.29,268.22 38.29,245.89" fill="none" stroke="#C4A56A" stroke-width="1.5" opacity="0"/>
+  </g>
 
-        <!-- ─── LABELS ─── -->
-        <text x="105" y="76" text-anchor="middle" fill="#CAC5BE" font-family="DM Sans,sans-serif" font-size="13" font-weight="500" style="pointer-events:none">Soggiorno</text>
-        <text x="105" y="92" text-anchor="middle" fill="#3A3630" font-family="DM Sans,sans-serif" font-size="9" style="pointer-events:none">Zona giorno · ~25 mq</text>
-
-        <text x="265" y="79" text-anchor="middle" fill="#CAC5BE" font-family="DM Sans,sans-serif" font-size="12" font-weight="500" style="pointer-events:none">Cucina</text>
-        <text x="265" y="94" text-anchor="middle" fill="#3A3630" font-family="DM Sans,sans-serif" font-size="9" style="pointer-events:none">~12 mq</text>
-
-        <text x="45" y="210" text-anchor="middle" fill="#9A9590" font-family="DM Sans,sans-serif" font-size="9" font-weight="500" style="pointer-events:none">Bagno 2</text>
-        <text x="45" y="222" text-anchor="middle" fill="#3A3630" font-family="DM Sans,sans-serif" font-size="8" style="pointer-events:none">~5 mq</text>
-
-        <text x="150" y="213" text-anchor="middle" fill="#292522" font-family="DM Sans,sans-serif" font-size="9" style="pointer-events:none">Ingresso</text>
-
-        <text x="265" y="210" text-anchor="middle" fill="#9A9590" font-family="DM Sans,sans-serif" font-size="9" font-weight="500" style="pointer-events:none">Bagno 1</text>
-        <text x="265" y="222" text-anchor="middle" fill="#3A3630" font-family="DM Sans,sans-serif" font-size="8" style="pointer-events:none">~7 mq</text>
-
-        <text x="80" y="333" text-anchor="middle" fill="#CAC5BE" font-family="DM Sans,sans-serif" font-size="11" font-weight="500" style="pointer-events:none">Camera</text>
-        <text x="80" y="348" text-anchor="middle" fill="#CAC5BE" font-family="DM Sans,sans-serif" font-size="11" font-weight="500" style="pointer-events:none">Padronale</text>
-        <text x="80" y="362" text-anchor="middle" fill="#3A3630" font-family="DM Sans,sans-serif" font-size="9" style="pointer-events:none">~18 mq</text>
-
-        <text x="240" y="336" text-anchor="middle" fill="#CAC5BE" font-family="DM Sans,sans-serif" font-size="11" font-weight="500" style="pointer-events:none">2ª Camera</text>
-        <text x="240" y="351" text-anchor="middle" fill="#3A3630" font-family="DM Sans,sans-serif" font-size="9" style="pointer-events:none">~14 mq</text>
-
-        <!-- North indicator -->
-        <g transform="translate(298,416)">
-          <circle cx="0" cy="0" r="11" fill="rgba(0,0,0,0.55)" stroke="#222" stroke-width="1"/>
-          <line x1="0" y1="-3" x2="0" y2="-8" stroke="#C4A56A" stroke-width="1.5" stroke-opacity="0.7"/>
-          <text x="0" y="5" text-anchor="middle" fill="#4A4845" font-family="DM Sans,sans-serif" font-size="8" font-weight="600" style="pointer-events:none">N</text>
-        </g>
-
-      </svg>
-    </div>
+  <!-- Clickable hotspots -->
+  <g id="room-hotspots" cursor="pointer">
+    <rect class="room-fill" data-room="cameraPad" x="87"   y="1.5"  width="113"  height="110.5" fill="transparent"/>
+    <rect class="room-fill" data-room="bagno1"    x="1.5"  y="1.5"  width="85"   height="110.5" fill="transparent"/>
+    <rect class="room-fill" data-room="soggiorno" x="1.5"  y="112"  width="198.5" height="89"   fill="transparent"/>
+    <rect class="room-fill" data-room="bagno2"    x="71.5" y="201"  width="94.5" height="44.9"  fill="transparent"/>
+    <polygon class="room-fill" data-room="camera2" points="166.12,245.89 166.12,334 54.9,334 54.9,296.66 1.5,296.66 1.5,268.22 38.29,268.22 38.29,245.89" fill="transparent"/>
+  </g>
+</svg>
 
   </div>
 </div>
@@ -538,26 +521,12 @@
     <button id="sheet-close" class="sheet-close" aria-label="Chiudi">✕</button>
   </div>
 
-  <!-- Prima/Dopo toggle (shown only when render is available) -->
-  <div id="toggle-wrap" class="toggle-wrap" hidden>
-    <div class="toggle">
-      <button id="btn-prima" class="toggle__btn" data-mode="prima">Prima</button>
-      <button id="btn-dopo" class="toggle__btn is-active-dopo" data-mode="dopo">Arredato</button>
-    </div>
-  </div>
-
-  <!-- Render-in-arrivo badge (shown when no render) -->
-  <div id="badge-arrivo" class="badge-arrivo" hidden>
-    <div class="badge-arrivo__dot" aria-hidden="true"></div>
-    <span class="badge-arrivo__text">Render in arrivo</span>
-  </div>
-
   <!-- Room image -->
   <div class="sheet-img-wrap">
     <img id="sheet-img" src="" alt="" class="sheet-img" loading="lazy">
   </div>
 
-  <!-- Tour CTA -->
+  <!-- Tour CTA (temporaneamente rimosso)
   <div class="sheet-tour-cta">
     <a href="tour.html" id="sheet-tour-btn" class="sheet-tour-btn" rel="noopener">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#383832" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
@@ -568,6 +537,7 @@
       <span class="sheet-tour-btn__label">Tour virtuale 360°</span>
     </a>
   </div>
+  -->
 
 </div>
 

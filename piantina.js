@@ -4,55 +4,35 @@
 
 const ROOMS = {
   soggiorno: {
-    label:  'Soggiorno',
-    mq:     '~25 mq',
-    render: 'assets/render/render-soggiorno-divano.webp',
-    vuoto:  'assets/foto/interno/finestra_salotto_int_pre.jpg',
-  },
-  cucina: {
-    label:  'Cucina',
-    mq:     '~12 mq',
-    render: 'assets/render/render-cucina-arredata.webp',
-    vuoto:  'assets/tour/tour-cucina-vuota.webp',
+    label:  'Soggiorno & Cucina',
+    mq:     '~24 mq',
+    img:    'assets/render/render-soggiorno-divano.webp',
   },
   bagno2: {
     label:  'Bagno 2',
     mq:     '~5 mq',
-    render: null,
-    vuoto:  'assets/tour/tour-bagno2-vuoto.webp',
+    img:    'assets/tour/tour-bagno2-vuoto.webp',
   },
   bagno1: {
     label:  'Bagno 1',
-    mq:     '~7 mq',
-    render: 'assets/render/foto_bagno_arredata.png',
-    vuoto:  'assets/foto/interno/bagno_1.jpg',
+    mq:     '~5 mq',
+    img:    'assets/render/foto_bagno_arredata.png',
   },
   cameraPad: {
     label:  'Camera Padronale',
-    mq:     '~18 mq',
-    render: 'assets/render/render-camera-arredata.webp',
-    vuoto:  'assets/tour/tour-camera-vuota.webp',
+    mq:     '~15 mq',
+    img:    'assets/render/render-camera-arredata.webp',
   },
   camera2: {
     label:  '2ª Camera',
     mq:     '~14 mq',
-    render: null,
-    vuoto:  'assets/tour/tour-camera2-vuota.webp',
+    img:    'assets/tour/tour-camera2-vuota.webp',
   },
 };
 
-const BASE_FILLS = {
-  soggiorno: '#28241B',
-  cucina:    '#22201A',
-  bagno2:    '#192025',
-  bagno1:    '#1A2126',
-  cameraPad: '#1E1C27',
-  camera2:   '#1C1D26',
-};
-const ACTIVE_FILL = '#38321A';
+const ACTIVE_FILL = '#3A3020';
 
 let selectedRoom = null;
-let showBefore   = false;
 
 // ── DOM refs ──────────────────────────────────────────────
 const overlay    = document.getElementById('room-overlay');
@@ -61,15 +41,17 @@ const sheetTitle = document.getElementById('sheet-title');
 const sheetMq    = document.getElementById('sheet-mq');
 const sheetImg   = document.getElementById('sheet-img');
 const sheetClose = document.getElementById('sheet-close');
-const toggleWrap = document.getElementById('toggle-wrap');
-const badgeArrivo = document.getElementById('badge-arrivo');
-const btnPrima   = document.getElementById('btn-prima');
-const btnDopo    = document.getElementById('btn-dopo');
 
 // ── Helpers ───────────────────────────────────────────────
 function setRoomFill(roomId, active) {
   const el = document.getElementById('fill-' + roomId);
-  if (el) el.setAttribute('fill', active ? ACTIVE_FILL : (BASE_FILLS[roomId] || '#1A1A1A'));
+  if (!el) return;
+  if (active) {
+    el.setAttribute('fill', ACTIVE_FILL);
+    el.setAttribute('opacity', '1');
+  } else {
+    el.setAttribute('opacity', '0');
+  }
 }
 
 function setRoomSelection(roomId, selected) {
@@ -80,22 +62,10 @@ function setRoomSelection(roomId, selected) {
 function updateSheet() {
   const room = selectedRoom ? ROOMS[selectedRoom] : null;
   if (!room) return;
-
-  const hasRender = !!room.render;
   sheetTitle.textContent = room.label;
   sheetMq.textContent    = room.mq;
-
-  toggleWrap.hidden   = !hasRender;
-  badgeArrivo.hidden  = hasRender;
-
-  const src = (showBefore && hasRender) ? room.vuoto : (room.render || room.vuoto || '');
-  sheetImg.src = src;
+  sheetImg.src = room.img || '';
   sheetImg.alt = room.label;
-
-  btnPrima.classList.toggle('is-active-prima', showBefore);
-  btnPrima.classList.toggle('is-active-dopo',  false);
-  btnDopo.classList.toggle('is-active-dopo',  !showBefore);
-  btnDopo.classList.toggle('is-active-prima',  false);
 }
 
 // ── Open / close ──────────────────────────────────────────
@@ -105,7 +75,6 @@ function openRoom(roomId) {
     setRoomSelection(selectedRoom, false);
   }
   selectedRoom = roomId;
-  showBefore   = false;
 
   setRoomFill(roomId, true);
   setRoomSelection(roomId, true);
@@ -142,21 +111,11 @@ document.querySelectorAll('.room-fill').forEach(el => {
 sheetClose.addEventListener('click', closeRoom);
 overlay.addEventListener('click', closeRoom);
 
-btnPrima.addEventListener('click', () => {
-  showBefore = true;
-  updateSheet();
-});
-
-btnDopo.addEventListener('click', () => {
-  showBefore = false;
-  updateSheet();
-});
-
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape' && selectedRoom) closeRoom();
 });
 
-// ── Prefetch renders ──────────────────────────────────────
+// ── Prefetch images ───────────────────────────────────────
 Object.values(ROOMS).forEach(r => {
-  if (r.render) new Image().src = r.render;
+  if (r.img) new Image().src = r.img;
 });
