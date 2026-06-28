@@ -679,7 +679,7 @@ body {
   left: 0;
   right: 0;
   display: flex;
-  gap: 8px;
+  gap: 4px;
   padding: 10px 16px;
   padding-bottom: calc(10px + env(safe-area-inset-bottom, 0px));
   background: rgba(8,8,8,0.92);
@@ -691,13 +691,14 @@ body {
 
 .btn-wa {
   flex: 1;
-  height: 52px;
+  height: 58px;
   background: #25D366;
   border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 9px;
+  gap: 12px;
+  padding: 0 14px;
   font-family: 'DM Sans', sans-serif;
   font-size: 0.875em;
   font-weight: 600;
@@ -710,8 +711,8 @@ body {
 .btn-wa:active { opacity: 0.88; }
 
 .btn-call {
-  width: 52px;
-  height: 52px;
+  width: 58px;
+  height: 58px;
   flex-shrink: 0;
   background: #181818;
   border-radius: 12px;
