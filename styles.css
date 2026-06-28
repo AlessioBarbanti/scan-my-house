@@ -307,6 +307,7 @@ body {
   gap: 16px;
   cursor: pointer;
   text-align: left;
+  text-decoration: none;
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -537,6 +538,7 @@ body {
   font-size: 16px;
   -webkit-tap-highlight-color: transparent;
   font-family: 'DM Sans', sans-serif;
+  text-decoration: none;
 }
 
 /* ── Hotspots (Pannellum) ───────────────────────────────── */

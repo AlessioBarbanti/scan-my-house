@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#000000">
+  <title>Tour Virtuale 360° — Trilocale Via Paisiello</title>
+
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap">
+
+  <!-- Pannellum -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
+
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="tour.js"></script>
+</head>
+<body>
+
+  <!-- ══════════════════ VIEWER 360 ══════════════════ -->
+  <div id="viewer-wrapper" class="viewer-wrapper" aria-label="Tour virtuale 360°" role="region">
+
+    <nav class="scene-nav" aria-label="Naviga tra le stanze">
+      <div class="scene-nav__scroll no-scrollbar">
+        <button class="scene-btn active" data-scene="soggiorno" aria-pressed="true">Zona Giorno</button>
+        <button class="scene-btn"        data-scene="cucina"    aria-pressed="false">Cucina</button>
+        <button class="scene-btn"        data-scene="camera"    aria-pressed="false">Camera Pad.</button>
+        <button class="scene-btn"        data-scene="camera2"   aria-pressed="false">2ª Camera</button>
+        <button class="scene-btn"        data-scene="bagno1"    aria-pressed="false">Bagno 1</button>
+        <button class="scene-btn"        data-scene="bagno2"    aria-pressed="false">Bagno 2</button>
+      </div>
+      <a href="index.html" class="scene-btn--back" aria-label="Chiudi tour">✕</a>
+    </nav>
+
+    <div id="viewer" role="img" aria-label="Panorama 360° della stanza"></div>
+
+  </div>
+
+
+  <!-- ══════════════════ MODALE VIRTUAL STAGING ══════════════════ -->
+  <div id="staging-modal" class="modal" hidden role="dialog" aria-modal="true" aria-label="Virtual staging">
+    <div class="modal__backdrop" id="modal-backdrop"></div>
+    <div class="modal__content">
+      <div class="modal__header">
+        <p class="modal__title" id="modal-title"></p>
+        <button id="modal-close" class="modal__close" aria-label="Chiudi">✕</button>
+      </div>
+      <img id="modal-img" src="" alt="" class="modal__img"
+           onerror="this.src='assets/placeholder-render.svg'; this.onerror=null;">
+    </div>
+  </div>
+
+</body>
+</html>
