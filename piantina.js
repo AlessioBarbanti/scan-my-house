@@ -21,12 +21,12 @@ const ROOMS = {
   cameraPad: {
     label:  'Camera Padronale',
     mq:     '~15 mq',
-    img:    'assets/render/camera_letto_ovest.png',
+    img:    'assets/render/camera_letto_est.png',
   },
   camera2: {
     label:  '2ª Camera',
     mq:     '~14 mq',
-    img:    'assets/render/camera_letto_est.png',
+    img:    'assets/render/camera_letto_ovest.png',
   },
 };
 
