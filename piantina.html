@@ -194,7 +194,17 @@
       color: #9A938D;
     }
 
-    .room-fill { cursor: pointer; }
+      @keyframes room-tap-hint {
+        0%   { fill: transparent; }
+        9%   { fill: rgba(196,165,106,0.18); }
+        18%  { fill: transparent; }
+        100% { fill: transparent; }
+      }
+
+      .room-fill {
+        cursor: pointer;
+        animation: room-tap-hint 10s ease-in-out 1.2s infinite;
+      }
 
     /* ── SVG wrapper ── */
     .floorplan-svg-wrap {
@@ -521,7 +531,7 @@
   <!-- Room fill overlays (below text so labels remain readable) -->
   <g id="room-fills">
     <rect id="fill-cameraPad" x="87"   y="1.5"  width="113"  height="110.5" fill="#161410" opacity="0"/>
-    <rect id="fill-bagno1"    x="1.5"  y="1.5"  width="85"   height="110.5" fill="#161410" opacity="0"/>
+    <rect id="fill-bagno1"    x="1.5"  y="40"   width="52"   height="73"   fill="#161410" opacity="0"/>
     <rect id="fill-soggiorno" x="1.5"  y="112"  width="198.5" height="89"   fill="#161410" opacity="0"/>
     <rect id="fill-bagno2"    x="71.5" y="201"  width="94.5" height="44.9"  fill="#161410" opacity="0"/>
     <polygon id="fill-camera2" points="166.12,245.89 166.12,334 54.9,334 54.9,296.66 1.5,296.66 1.5,268.22 38.29,268.22 38.29,245.89" fill="#161410" opacity="0"/>
@@ -537,7 +547,7 @@
   <!-- Selection rings -->
   <g id="room-selections" pointer-events="none">
     <rect id="sel-cameraPad" x="87"   y="1.5"  width="113"  height="110.5" fill="none" stroke="#C4A56A" stroke-width="1.5" opacity="0"/>
-    <rect id="sel-bagno1"    x="1.5"  y="1.5"  width="85"   height="110.5" fill="none" stroke="#C4A56A" stroke-width="1.5" opacity="0"/>
+    <rect id="sel-bagno1"    x="1.5"  y="40"   width="52"   height="73"   fill="none" stroke="#C4A56A" stroke-width="1.5" opacity="0"/>
     <rect id="sel-soggiorno" x="1.5"  y="112"  width="198.5" height="89"   fill="none" stroke="#C4A56A" stroke-width="1.5" opacity="0"/>
     <rect id="sel-bagno2"    x="71.5" y="201"  width="94.5" height="44.9"  fill="none" stroke="#C4A56A" stroke-width="1.5" opacity="0"/>
     <polygon id="sel-camera2" points="166.12,245.89 166.12,334 54.9,334 54.9,296.66 1.5,296.66 1.5,268.22 38.29,268.22 38.29,245.89" fill="none" stroke="#C4A56A" stroke-width="1.5" opacity="0"/>
@@ -546,7 +556,7 @@
   <!-- Clickable hotspots -->
   <g id="room-hotspots" cursor="pointer">
     <rect class="room-fill" data-room="cameraPad" x="87"   y="1.5"  width="113"  height="110.5" fill="transparent"/>
-    <rect class="room-fill" data-room="bagno1"    x="1.5"  y="1.5"  width="85"   height="110.5" fill="transparent"/>
+    <rect class="room-fill" data-room="bagno1"    x="1.5"  y="40"   width="52"   height="73"   fill="transparent"/>
     <rect class="room-fill" data-room="soggiorno" x="1.5"  y="112"  width="198.5" height="89"   fill="transparent"/>
     <rect class="room-fill" data-room="bagno2"    x="71.5" y="201"  width="94.5" height="44.9"  fill="transparent"/>
     <polygon class="room-fill" data-room="camera2" points="166.12,245.89 166.12,334 54.9,334 54.9,296.66 1.5,296.66 1.5,268.22 38.29,268.22 38.29,245.89" fill="transparent"/>

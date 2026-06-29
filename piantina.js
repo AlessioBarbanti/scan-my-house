@@ -4,27 +4,27 @@
 
 const ROOMS = {
   soggiorno: {
-    label:  'Soggiorno & Cucina',
+    label:  'Soggiorno e cucina',
     mq:     '~24 mq',
     img:    'assets/render/soggiorno_cucina.png',
   },
   bagno2: {
-    label:  'Bagno 2',
+    label:  'Bagno',
     mq:     '~5 mq',
     img:    'assets/render/bagno_centrale.png',
   },
   bagno1: {
-    label:  'Bagno 1',
+    label:  'Bagno',
     mq:     '~5 mq',
     img:    'assets/render/bagno_est.png',
   },
   cameraPad: {
-    label:  'Camera Padronale',
+    label:  'Camera da letto',
     mq:     '~15 mq',
     img:    'assets/render/camera_letto_est.png',
   },
   camera2: {
-    label:  '2ª Camera',
+    label:  'Camera da letto',
     mq:     '~14 mq',
     img:    'assets/render/camera_letto_ovest.png',
   },
