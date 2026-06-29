@@ -6,27 +6,27 @@ const ROOMS = {
   soggiorno: {
     label:  'Soggiorno & Cucina',
     mq:     '~24 mq',
-    img:    'assets/render/render-soggiorno-divano.webp',
+    img:    'assets/render/soggiorno_cucina.png',
   },
   bagno2: {
     label:  'Bagno 2',
     mq:     '~5 mq',
-    img:    'assets/tour/tour-bagno2-vuoto.webp',
+    img:    'assets/render/bagno_centrale.png',
   },
   bagno1: {
     label:  'Bagno 1',
     mq:     '~5 mq',
-    img:    'assets/render/foto_bagno_arredata.png',
+    img:    'assets/render/bagno_est.png',
   },
   cameraPad: {
     label:  'Camera Padronale',
     mq:     '~15 mq',
-    img:    'assets/render/render-camera-arredata.webp',
+    img:    'assets/render/camera_letto_ovest.png',
   },
   camera2: {
     label:  '2ª Camera',
     mq:     '~14 mq',
-    img:    'assets/tour/tour-camera2-vuota.webp',
+    img:    'assets/render/camera_letto_est.png',
   },
 };
 
