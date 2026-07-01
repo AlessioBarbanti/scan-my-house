@@ -8,15 +8,21 @@ const WA_TEXT   = encodeURIComponent(
 );
 const WA_URL    = `https://wa.me/${WA_NUMBER}?text=${WA_TEXT}`;
 
-function gtagEvent(name, params = {}) {
-  if (typeof window.gtag === 'function') window.gtag('event', name, params);
-}
+const gtagEvent = window.gtagEvent || function () {};
 
 document.addEventListener('DOMContentLoaded', () => {
-  const el = document.getElementById('wa-sticky');
-  if (!el) return;
-  el.href = WA_URL;
-  el.addEventListener('click', () =>
-    gtagEvent('whatsapp_clicked', { position: 'sticky' })
-  );
+  const wa = document.getElementById('wa-sticky');
+  if (wa) {
+    wa.href = WA_URL;
+    wa.addEventListener('click', () =>
+      gtagEvent('contact_click', { method: 'whatsapp', location: 'sticky' })
+    );
+  }
+
+  const call = document.querySelector('.btn-call');
+  if (call) {
+    call.addEventListener('click', () =>
+      gtagEvent('contact_click', { method: 'phone', location: 'sticky' })
+    );
+  }
 });

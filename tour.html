@@ -1,13 +1,36 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <!-- Google tag (gtag.js) -->
+  <!-- Google tag (gtag.js) + Consent Mode v2 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-MCZ5CP1CPZ"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
 
+    // Consent Mode v2 — default: storage negato finché l'utente non sceglie
+    gtag('consent', 'default', {
+      ad_storage:            'denied',
+      ad_user_data:          'denied',
+      ad_personalization:    'denied',
+      analytics_storage:     'denied',
+      functionality_storage: 'granted',
+      security_storage:      'granted',
+      wait_for_update:       500
+    });
+
+    // Riapplica un consenso già dato (prima del config, così GA parte allineato)
+    try {
+      if (localStorage.getItem('smh_consent') === 'granted') {
+        gtag('consent', 'update', {
+          ad_storage:         'granted',
+          ad_user_data:       'granted',
+          ad_personalization: 'granted',
+          analytics_storage:  'granted'
+        });
+      }
+    } catch (e) {}
+
+    gtag('js', new Date());
     gtag('config', 'G-MCZ5CP1CPZ');
   </script>
 
@@ -28,6 +51,8 @@
   <script defer src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
 
   <link rel="stylesheet" href="styles.css">
+  <script defer src="analytics.js"></script>
+  <script defer src="consent.js"></script>
   <script defer src="tour.js"></script>
 </head>
 <body>
@@ -44,7 +69,8 @@
         <button class="scene-btn"        data-scene="bagno1"    aria-pressed="false">Bagno 1</button>
         <button class="scene-btn"        data-scene="bagno2"    aria-pressed="false">Bagno 2</button>
       </div>
-      <a href="index.html" class="scene-btn--back" aria-label="Chiudi tour">✕</a>
+      <a href="index.html" class="scene-btn--back" aria-label="Chiudi tour"
+         data-ga="navigate" data-ga-to="landing" data-ga-from="tour">✕</a>
     </nav>
 
     <div id="viewer" role="img" aria-label="Panorama 360° della stanza"></div>

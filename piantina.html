@@ -1,13 +1,36 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <!-- Google tag (gtag.js) -->
+  <!-- Google tag (gtag.js) + Consent Mode v2 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-MCZ5CP1CPZ"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
 
+    // Consent Mode v2 — default: storage negato finché l'utente non sceglie
+    gtag('consent', 'default', {
+      ad_storage:            'denied',
+      ad_user_data:          'denied',
+      ad_personalization:    'denied',
+      analytics_storage:     'denied',
+      functionality_storage: 'granted',
+      security_storage:      'granted',
+      wait_for_update:       500
+    });
+
+    // Riapplica un consenso già dato (prima del config, così GA parte allineato)
+    try {
+      if (localStorage.getItem('smh_consent') === 'granted') {
+        gtag('consent', 'update', {
+          ad_storage:         'granted',
+          ad_user_data:       'granted',
+          ad_personalization: 'granted',
+          analytics_storage:  'granted'
+        });
+      }
+    } catch (e) {}
+
+    gtag('js', new Date());
     gtag('config', 'G-MCZ5CP1CPZ');
   </script>
 
@@ -398,7 +421,8 @@
       </p>
       <h1 class="page-header__title">Piantina</h1>
     </div>
-    <a href="index.html" class="page-header__back" aria-label="Torna alla scheda">
+    <a href="index.html" class="page-header__back" aria-label="Torna alla scheda"
+       data-ga="navigate" data-ga-to="landing" data-ga-from="piantina">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <path d="M19 12H5M12 5l-7 7 7 7"></path>
       </svg>
@@ -614,6 +638,8 @@
 
 </div>
 
+<script src="analytics.js" defer></script>
+<script src="consent.js" defer></script>
 <script src="piantina.js" defer></script>
 </body>
 </html>
