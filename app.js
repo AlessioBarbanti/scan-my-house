@@ -8,7 +8,7 @@ const WA_TEXT   = encodeURIComponent(
 );
 const WA_URL    = `https://wa.me/${WA_NUMBER}?text=${WA_TEXT}`;
 
-const gtagEvent = window.gtagEvent || function () {};
+function gtagEvent(n, p) { if (typeof window.gtagEvent === 'function') window.gtagEvent(n, p); }
 
 document.addEventListener('DOMContentLoaded', () => {
   const wa = document.getElementById('wa-sticky');

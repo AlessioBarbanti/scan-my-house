@@ -18,7 +18,7 @@ let currentScene = 'soggiorno';
 let hotspotData  = [];
 let lastFocusedEl = null;
 
-const gtagEvent = window.gtagEvent || function () {};
+function gtagEvent(n, p) { if (typeof window.gtagEvent === 'function') window.gtagEvent(n, p); }
 
 function trackSceneView(sceneId, navigation) {
   gtagEvent('tour_scene_view', {

@@ -32,7 +32,7 @@ const ROOMS = {
 
 const ACTIVE_FILL = '#3A3020';
 
-const gtagEvent = window.gtagEvent || function () {};
+function gtagEvent(n, p) { if (typeof window.gtagEvent === 'function') window.gtagEvent(n, p); }
 
 let selectedRoom = null;
 

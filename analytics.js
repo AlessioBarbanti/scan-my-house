@@ -15,22 +15,45 @@
   window.gtagEvent = gtagEvent;
 
   // ── Riconoscimento visitatore (first-party, no PII) ─────────
-  // Usa localStorage per riconoscere lo stesso browser tra le visite:
+  // Usa localStorage + un cookie di backup per riconoscere il browser:
   // distingue nuovo/di ritorno, conta le visite e i giorni dalla prima.
   // ⚠️ Gira SOLO con consenso analytics: scrive storage sul dispositivo.
   var STORE_KEY   = 'smh_visitor';
+  var VC_COOKIE   = 'smh_vc';          // cookie di backup per visitCount
   var SESSION_GAP = 30 * 60 * 1000;   // 30 min → nuova "visita"
   var DAY_MS      = 24 * 60 * 60 * 1000;
 
-  function loadVisitor() {
-    try { return JSON.parse(localStorage.getItem(STORE_KEY)) || {}; }
-    catch (e) { return {}; }
+  function getVcCookie() {
+    var m = document.cookie.match(/(?:^|; )smh_vc=(\d+)/);
+    return m ? parseInt(m[1], 10) : 0;
   }
-  function saveVisitor(v) {
-    try { localStorage.setItem(STORE_KEY, JSON.stringify(v)); } catch (e) {}
+  function setVcCookie(count) {
+    var exp = new Date(Date.now() + 730 * DAY_MS).toUTCString();
+    document.cookie = VC_COOKIE + '=' + count + '; expires=' + exp + '; path=/; SameSite=Lax';
   }
 
+  function loadVisitor() {
+    try {
+      var s = JSON.parse(localStorage.getItem(STORE_KEY));
+      if (s && s.firstVisit) return s;
+      // localStorage cleared: restore visitCount from cookie so returning
+      // visitors aren't misclassified as new.
+      var vc = getVcCookie();
+      return vc > 0 ? { visitCount: vc } : {};
+    } catch (e) { return {}; }
+  }
+  function saveVisitor(v) {
+    try {
+      localStorage.setItem(STORE_KEY, JSON.stringify(v));
+      setVcCookie(v.visitCount || 1);
+    } catch (e) {}
+  }
+
+  var smhRecognitionDone = false;
+
   function runVisitorRecognition() {
+    if (smhRecognitionDone) return;
+    smhRecognitionDone = true;
     var now        = Date.now();
     var v          = loadVisitor();
     var firstEver  = !v.firstVisit;

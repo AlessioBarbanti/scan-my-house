@@ -37,8 +37,9 @@
     el.innerHTML =
       '<div class="cookie-banner__inner">' +
         '<p class="cookie-banner__text">' +
-          'Usiamo cookie di <strong>analisi</strong> (Google Analytics) per capire come ' +
-          'viene usato il sito e migliorarlo. Nessun dato viene raccolto finché non scegli. ' +
+          'Usiamo <strong>Google Analytics</strong> per capire come viene usato il sito. ' +
+          'Prima di scegliere, Google riceve solo segnali aggregati anonimi e privi di cookie. ' +
+          'Accettando ci permetti di misurare le visite con maggiore precisione. ' +
           'Puoi cambiare idea in qualsiasi momento.' +
         '</p>' +
         '<div class="cookie-banner__actions">' +
@@ -55,6 +56,7 @@
     btn.className = 'cookie-reopen';
     btn.setAttribute('aria-label', 'Preferenze cookie');
     btn.textContent = '🍪';
+    btn.hidden = true;
     btn.addEventListener('click', showBanner);
     return btn;
   }
@@ -102,9 +104,10 @@
   // ── Init ────────────────────────────────────────────────────
   function init() {
     ensureReopen();
-    if (!getChoice()) {
-      reopenEl.hidden = true;
-      showBanner();
+    if (getChoice()) {
+      reopenEl.hidden = false;  // returning user: show the reopen button
+    } else {
+      showBanner();             // new user: show the banner, button stays hidden
     }
   }
 
