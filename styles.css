@@ -781,3 +781,95 @@ body {
     height: 40px;
   }
 }
+
+/* ── Cookie consent ─────────────────────────────────────── */
+.cookie-banner {
+  position: fixed;
+  left: 50%;
+  bottom: 0;
+  transform: translate(-50%, 110%);
+  width: 100%;
+  max-width: 540px;
+  z-index: 1000;
+  background: #14110D;
+  border-top: 1px solid rgba(196,165,106,0.25);
+  box-shadow: 0 -10px 40px rgba(0,0,0,0.55);
+  padding: 18px 20px calc(18px + env(safe-area-inset-bottom, 0px));
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.cookie-banner.is-open { transform: translate(-50%, 0); }
+
+.cookie-banner__inner {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.cookie-banner__text {
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: rgba(237,232,224,0.78);
+}
+.cookie-banner__text strong { color: #EDE8E0; font-weight: 600; }
+
+.cookie-banner__actions {
+  display: flex;
+  gap: 10px;
+}
+
+.cookie-btn {
+  flex: 1;
+  height: 44px;
+  border-radius: 12px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: background 0.15s, color 0.15s, border-color 0.15s, opacity 0.15s;
+}
+.cookie-btn--ghost {
+  background: transparent;
+  color: rgba(237,232,224,0.75);
+  border: 1px solid rgba(255,255,255,0.18);
+}
+.cookie-btn--ghost:hover { border-color: rgba(255,255,255,0.32); color: #EDE8E0; }
+.cookie-btn--solid {
+  background: #C4A56A;
+  color: #0A0A0A;
+  border: 1px solid transparent;
+}
+.cookie-btn--solid:hover { opacity: 0.9; }
+
+.cookie-reopen {
+  position: fixed;
+  left: 14px;
+  bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+  z-index: 999;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(20,17,13,0.85);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  font-size: 1.05rem;
+  line-height: 1;
+  cursor: pointer;
+  opacity: 0.55;
+  -webkit-tap-highlight-color: transparent;
+  transition: opacity 0.15s;
+}
+.cookie-reopen:hover { opacity: 1; }
+
+/* Sul landing la barra sticky occupa il fondo: solleva il trigger */
+.sticky-bar ~ .cookie-reopen {
+  bottom: calc(80px + env(safe-area-inset-bottom, 0px));
+}
+
+@media (min-width: 560px) {
+  .cookie-banner__inner { flex-direction: row; align-items: center; justify-content: space-between; }
+  .cookie-banner__text { flex: 1; }
+  .cookie-banner__actions { flex: 0 0 auto; }
+  .cookie-btn { flex: 0 0 auto; min-width: 110px; padding: 0 18px; }
+}

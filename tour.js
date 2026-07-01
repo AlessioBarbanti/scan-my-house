@@ -4,13 +4,28 @@
 
 const HOTSPOTS_URL = 'data/hotspots.json';
 
+const SCENE_LABELS = {
+  soggiorno: 'Zona Giorno',
+  cucina:    'Cucina',
+  camera:    'Camera Padronale',
+  camera2:   '2ª Camera',
+  bagno1:    'Bagno 1',
+  bagno2:    'Bagno 2',
+};
+
 let viewer       = null;
 let currentScene = 'soggiorno';
 let hotspotData  = [];
 let lastFocusedEl = null;
 
-function gtagEvent(name, params = {}) {
-  if (typeof window.gtag === 'function') window.gtag('event', name, params);
+const gtagEvent = window.gtagEvent || function () {};
+
+function trackSceneView(sceneId, navigation) {
+  gtagEvent('tour_scene_view', {
+    scene_id:    sceneId,
+    scene_label: SCENE_LABELS[sceneId] || sceneId,
+    navigation:  navigation, // 'initial' | 'scene_btn'
+  });
 }
 
 // ─────────────────── HOTSPOT BUILDER ─────────────────────────
@@ -25,7 +40,7 @@ function createHotspotEl(container, args) {
 function onHotspotClick(_e, args) {
   if (args.type === 'staging') openModal(args);
   else if (args.type === 'scene') switchScene(args.targetScene);
-  gtagEvent('hotspot_clicked', { hotspot_id: args.id, type: args.type });
+  gtagEvent('hotspot_click', { hotspot_id: args.id, hotspot_type: args.type });
 }
 
 function buildPannellumHotspot(h) {
@@ -83,7 +98,8 @@ function initTour() {
 
   currentScene = initialScene;
   highlightSceneBtn(initialScene);
-  gtagEvent('tour_started', { source: 'tour_page' });
+  gtagEvent('tour_start', { initial_scene: initialScene });
+  trackSceneView(initialScene, 'initial');
   prefetchStagingImages();
 }
 
@@ -92,6 +108,7 @@ function switchScene(sceneId) {
   viewer.loadScene(sceneId);
   currentScene = sceneId;
   highlightSceneBtn(sceneId);
+  trackSceneView(sceneId, 'scene_btn');
 }
 
 function highlightSceneBtn(sceneId) {

@@ -32,6 +32,8 @@ const ROOMS = {
 
 const ACTIVE_FILL = '#3A3020';
 
+const gtagEvent = window.gtagEvent || function () {};
+
 let selectedRoom = null;
 
 // ── DOM refs ──────────────────────────────────────────────
@@ -80,6 +82,11 @@ function openRoom(roomId) {
   setRoomSelection(roomId, true);
 
   updateSheet();
+
+  gtagEvent('room_open', {
+    room_id:    roomId,
+    room_label: (ROOMS[roomId] && ROOMS[roomId].label) || roomId,
+  });
 
   sheet.hidden = false;
   requestAnimationFrame(() => {
