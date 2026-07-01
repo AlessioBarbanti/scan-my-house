@@ -1,0 +1,15 @@
+{
+  "name": "scan-my-house",
+  "version": "1.0.0",
+  "description": "Landing page statica del trilocale di Via Paisiello (sito su GitHub Pages). Il package.json serve solo alla suite di test: il sito non ha build step.",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "devDependencies": {
+    "jsdom": "^25.0.1",
+    "vitest": "^2.1.9"
+  }
+}

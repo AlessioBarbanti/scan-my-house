@@ -32,7 +32,11 @@ const ROOMS = {
 
 const ACTIVE_FILL = '#3A3020';
 
-function gtagEvent(n, p) { if (typeof window.gtagEvent === 'function') window.gtagEvent(n, p); }
+// Delega all'implementazione esposta da analytics.js. NB: `const` (non
+// `function`) per non sovrascrivere `window.gtagEvent` in questo classic script.
+const gtagEvent = (name, params) => {
+  if (typeof window.gtagEvent === 'function') window.gtagEvent(name, params);
+};
 
 let selectedRoom = null;
 

@@ -18,7 +18,11 @@ let currentScene = 'soggiorno';
 let hotspotData  = [];
 let lastFocusedEl = null;
 
-function gtagEvent(n, p) { if (typeof window.gtagEvent === 'function') window.gtagEvent(n, p); }
+// Delega all'implementazione esposta da analytics.js. NB: `const` (non
+// `function`) per non sovrascrivere `window.gtagEvent` in questo classic script.
+const gtagEvent = (name, params) => {
+  if (typeof window.gtagEvent === 'function') window.gtagEvent(name, params);
+};
 
 function trackSceneView(sceneId, navigation) {
   gtagEvent('tour_scene_view', {

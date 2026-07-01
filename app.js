@@ -8,7 +8,11 @@ const WA_TEXT   = encodeURIComponent(
 );
 const WA_URL    = `https://wa.me/${WA_NUMBER}?text=${WA_TEXT}`;
 
-function gtagEvent(n, p) { if (typeof window.gtagEvent === 'function') window.gtagEvent(n, p); }
+// Delega all'implementazione esposta da analytics.js. NB: `const` (non
+// `function`) per non sovrascrivere `window.gtagEvent` in questo classic script.
+const gtagEvent = (name, params) => {
+  if (typeof window.gtagEvent === 'function') window.gtagEvent(name, params);
+};
 
 document.addEventListener('DOMContentLoaded', () => {
   const wa = document.getElementById('wa-sticky');
