@@ -197,16 +197,8 @@
       color: #9A938D;
     }
 
-      @keyframes room-tap-hint {
-        0%   { fill: transparent; }
-        9%   { fill: rgba(196,165,106,0.18); }
-        18%  { fill: transparent; }
-        100% { fill: transparent; }
-      }
-
       .room-fill {
         cursor: pointer;
-        animation: room-tap-hint 10s ease-in-out 1.2s infinite;
       }
 
     /* ── SVG wrapper ── */
@@ -437,6 +429,7 @@
       /* Room fills */
       .room  { fill: #161410; stroke: #3A3530; stroke-width: 3px; stroke-miterlimit: 10; }
 
+
       /* Structural */
       .wall   { fill: #2A2520; stroke: #3A3530; stroke-width: 3px; stroke-miterlimit: 10; }
       .column { fill: #3A3530; stroke-width: 0px; }
@@ -530,11 +523,12 @@
   </g>
   <!-- Room fill overlays (below text so labels remain readable) -->
   <g id="room-fills">
-    <rect id="fill-cameraPad" x="87"   y="1.5"  width="113"  height="110.5" fill="#161410" opacity="0"/>
-    <rect id="fill-bagno1"    x="1.5"  y="40"   width="52"   height="73"   fill="#161410" opacity="0"/>
-    <rect id="fill-soggiorno" x="1.5"  y="112"  width="198.5" height="89"   fill="#161410" opacity="0"/>
-    <rect id="fill-bagno2"    x="71.5" y="201"  width="94.5" height="44.9"  fill="#161410" opacity="0"/>
-    <polygon id="fill-camera2" points="166.12,245.89 166.12,334 54.9,334 54.9,296.66 1.5,296.66 1.5,268.22 38.29,268.22 38.29,245.89" fill="#161410" opacity="0"/>
+    <rect id="fill-cameraPad" x="87"   y="1.5"  width="113"  height="110.5" fill="rgba(196,165,106,0.18)" opacity="0"/>
+    <rect id="fill-bagno1"    x="1.5"  y="40"   width="52"   height="73"   fill="rgba(196,165,106,0.18)" opacity="0"/>
+    <rect id="fill-soggiorno" x="1.5"  y="112"  width="198.5" height="89"   fill="rgba(196,165,106,0.18)" opacity="0"/>
+    <rect id="fill-bagno2"    x="71.5" y="201"  width="94.5" height="44.9"  fill="rgba(196,165,106,0.18)" opacity="0"/>
+    <polygon id="fill-camera2" points="166.12,245.89 166.12,334 54.9,334 54.9,296.66 1.5,296.66 1.5,268.22 38.29,268.22 38.29,245.89" fill="rgba(196,165,106,0.18)" opacity="0"/>
+    <rect id="fill-ingressoEsterno" x="166.13" y="214.05" width="34" height="120" fill="rgba(196,165,106,0.18)" opacity="0"/>
   </g>
 
   <text class="label" transform="translate(188.4 312.6) rotate(-90)">Ingresso esterno</text>
@@ -551,6 +545,7 @@
     <rect id="sel-soggiorno" x="1.5"  y="112"  width="198.5" height="89"   fill="none" stroke="#C4A56A" stroke-width="1.5" opacity="0"/>
     <rect id="sel-bagno2"    x="71.5" y="201"  width="94.5" height="44.9"  fill="none" stroke="#C4A56A" stroke-width="1.5" opacity="0"/>
     <polygon id="sel-camera2" points="166.12,245.89 166.12,334 54.9,334 54.9,296.66 1.5,296.66 1.5,268.22 38.29,268.22 38.29,245.89" fill="none" stroke="#C4A56A" stroke-width="1.5" opacity="0"/>
+    <rect id="sel-ingressoEsterno" x="166.13" y="214.05" width="34" height="120" fill="none" stroke="#C4A56A" stroke-width="1.5" opacity="0"/>
   </g>
 
   <!-- Clickable hotspots -->
@@ -560,6 +555,7 @@
     <rect class="room-fill" data-room="soggiorno" x="1.5"  y="112"  width="198.5" height="89"   fill="transparent"/>
     <rect class="room-fill" data-room="bagno2"    x="71.5" y="201"  width="94.5" height="44.9"  fill="transparent"/>
     <polygon class="room-fill" data-room="camera2" points="166.12,245.89 166.12,334 54.9,334 54.9,296.66 1.5,296.66 1.5,268.22 38.29,268.22 38.29,245.89" fill="transparent"/>
+    <rect class="room-fill" data-room="ingressoEsterno" x="166.13" y="214.05" width="34" height="120" fill="transparent"/>
   </g>
 </svg>
 
@@ -606,6 +602,7 @@
 
 <script src="analytics.js" defer></script>
 <script src="consent.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
 <script src="piantina.js" defer></script>
 </body>
 </html>

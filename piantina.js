@@ -28,12 +28,16 @@ const ROOMS = {
     mq:     '~14 mq',
     img:    'assets/render/camera_letto_ovest.png',
   },
+  ingressoEsterno: {
+    label:  'Ingresso esterno',
+    mq:     '',
+    img:    'assets/foto/esterno/esterno_enh.png',
+  },
 };
 
 const ACTIVE_FILL = '#3A3020';
+const GLOW_FILL   = 'rgba(196,165,106,0.18)';
 
-// Delega all'implementazione esposta da analytics.js. NB: `const` (non
-// `function`) per non sovrascrivere `window.gtagEvent` in questo classic script.
 const gtagEvent = (name, params) => {
   if (typeof window.gtagEvent === 'function') window.gtagEvent(name, params);
 };
@@ -54,9 +58,9 @@ function setRoomFill(roomId, active) {
   if (!el) return;
   if (active) {
     el.setAttribute('fill', ACTIVE_FILL);
-    el.setAttribute('opacity', '1');
+    gsap.set(el, { opacity: 1 });
   } else {
-    el.setAttribute('opacity', '0');
+    gsap.to(el, { opacity: 0, duration: 0.3, onComplete: () => el.setAttribute('fill', GLOW_FILL) });
   }
 }
 
@@ -74,8 +78,41 @@ function updateSheet() {
   sheetImg.alt = room.label;
 }
 
+// ── Intro animation ───────────────────────────────────────
+const ROOM_SEQUENCE = ['ingressoEsterno', 'soggiorno', 'cameraPad', 'bagno1', 'bagno2', 'camera2'];
+
+let introTl = null;
+
+function buildIntroTimeline() {
+  const allFills = ROOM_SEQUENCE
+    .map(id => document.getElementById('fill-' + id))
+    .filter(Boolean);
+
+  const tl = gsap.timeline({
+    repeat: -1,
+    repeatDelay: 2,
+    defaults: { ease: 'power1.inOut', duration: 0.5 },
+  });
+
+  // Stanze una alla volta — GSAP le catena in sequenza automaticamente
+  ROOM_SEQUENCE.forEach(roomId => {
+    const el = document.getElementById('fill-' + roomId);
+    if (!el) return;
+    tl.to(el, { opacity: 1 })          // fade in
+      .to(el, { opacity: 0 }, '+=0.7'); // resta accesa 0.7s, poi fade out
+  });
+
+  // Pulse finale — parte 0.8s dopo che l'ultima stanza si è spenta
+  tl.to(allFills, { opacity: 1 }, '+=0.8')   // tutte insieme
+    .to(allFills, { opacity: 0 }, '+=1.0');   // restano 1s, poi si spengono
+
+  return tl;
+}
+
 // ── Open / close ──────────────────────────────────────────
 function openRoom(roomId) {
+  if (introTl) introTl.pause();
+
   if (selectedRoom && selectedRoom !== roomId) {
     setRoomFill(selectedRoom, false);
     setRoomSelection(selectedRoom, false);
@@ -84,7 +121,6 @@ function openRoom(roomId) {
 
   setRoomFill(roomId, true);
   setRoomSelection(roomId, true);
-
   updateSheet();
 
   gtagEvent('room_open', {
@@ -110,7 +146,10 @@ function closeRoom() {
   }
 
   sheet.addEventListener('transitionend', () => {
-    if (!sheet.classList.contains('is-open')) sheet.hidden = true;
+    if (!sheet.classList.contains('is-open')) {
+      sheet.hidden = true;
+      if (introTl) gsap.delayedCall(0.8, () => introTl.restart());
+    }
   }, { once: true });
 }
 
@@ -124,6 +163,11 @@ overlay.addEventListener('click', closeRoom);
 
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape' && selectedRoom) closeRoom();
+});
+
+// ── Init ──────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  introTl = buildIntroTimeline();
 });
 
 // ── Prefetch images ───────────────────────────────────────
